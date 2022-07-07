@@ -1,0 +1,27 @@
+.header{
+    width: 75%;
+    height: 10vh;
+    background-color: #E9E9E9;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+    h1{
+        font-family: var(--title_font);
+        color: var(--title_black);
+    }
+    button{
+        background-color: #D9D9D9;
+        width: 8vh;
+        height: 8vh;
+    }
+    .theme_toggler{
+        width: 50px;
+        height: 20px;
+        background-color: var(--grey);
+        border-radius: 20px;
+    }
+}

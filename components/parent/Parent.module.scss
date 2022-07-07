@@ -1,0 +1,13 @@
+.container{
+    width: 100%;
+    min-height: 100vh;
+    // background-color: red;
+    display: flex;
+    .main{
+        position: absolute;
+        left: 25%;
+        top: 10vh;
+        width: 75%;
+        z-index: 10
+    }
+}

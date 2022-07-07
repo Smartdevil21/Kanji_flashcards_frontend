@@ -1,0 +1,43 @@
+.sidebar{
+    width: 25%;
+    height: 100%;
+    min-height: 100vh;
+    background-color: #252525;
+    background-image: url(../../assets/kanji.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom-left;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    nav{
+        ul{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            li{
+                list-style: none;
+                padding: 5% 40px;
+                text-align: right;
+                a{
+                    font-weight: bold;
+                    text-decoration: none;
+                    font-family: var(--content_font);
+                }
+            }
+            .sidebar_links{
+                a{
+                    color: var(--grey);
+                }
+            }
+            .sidebar_link_active{
+                a{
+                    color: var(--orange);
+                }
+            }
+        }
+    }
+}
