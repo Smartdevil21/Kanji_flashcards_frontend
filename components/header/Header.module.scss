@@ -24,4 +24,15 @@
         background-color: var(--grey);
         border-radius: 20px;
     }
+    .log_btns{
+        button{
+            width:fit-content;
+            height: fit-content;
+            padding-left: 20px;
+            padding-right: 20px;
+            background-color: var(--orange);
+            color: #f9f9f9;
+            text-transform: none;
+        }
+    }
 }

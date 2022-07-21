@@ -1,0 +1,42 @@
+.practice {
+	background-color: #f2f2f2;
+	width: 100%;
+	height: 90vh;
+	display: flex;
+	justify-content: flex-start;
+	padding: 10vh 30px 30px 30px;
+	align-items: center;
+	flex-direction: column;
+	font-family: var(--content_font);
+	position: relative;
+	overflow-y: scroll;
+	h1 {
+		margin-bottom: 20px;
+	}
+	.classes {
+		margin-top: 20px;
+		width: 100%;
+		// background-color: red;
+		.classes_container {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+		}
+	}
+	.nxt {
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		button {
+			text-transform: none;
+			background-color: var(--orange);
+			a {
+				color: #f9f9f9;
+				text-decoration: none;
+			}
+			&:disabled{
+				opacity: 0.5;
+			}
+		}
+	}
+}

@@ -3,6 +3,11 @@ import Styles from '../styles/Home.module.scss';
 import Parent from '../components/parent/Parent';
 import { Button, Stack } from '@mui/material';
 import { useState, Dispatch, SetStateAction } from 'react';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 type CardProps = {
 	setShowKanjiCard: Dispatch<SetStateAction<boolean>>;
@@ -42,7 +47,7 @@ const MeaningCard = ({ setShowKanjiCard }: CardProps) => {
 				</p>
 				<br />
 				<p>
-					<strong>Ex.: </strong>漢字(Kanji), 漢字(Kanji)
+					<strong>Eg. </strong>漢字(Kanji), 漢字(Kanji)
 				</p>
 			</div>
 		</>
@@ -51,20 +56,36 @@ const MeaningCard = ({ setShowKanjiCard }: CardProps) => {
 
 const Home: NextPage = () => {
 	const [showKanjiCard, setShowKanjiCard] = useState(true);
+	const [level, setLevel] = useState('5');
+
+	const handleChange = (event: SelectChangeEvent) => {
+		setLevel(event.target.value as string);
+	};
 
 	return (
 		<Parent>
 			<div className={Styles.home_container}>
-				<Stack direction={'row'} alignItems={"center"} marginBottom={"10px"} spacing={1}>
-					<label htmlFor="level">Select Level: </label>
-					<select name="level" aria-label="Select Level:" id="">
-						<option value="5">N5</option>
-						<option value="4">N4</option>
-						<option value="3">N3</option>
-						<option value="2">N2</option>
-						<option value="1">N1</option>
-					</select>
-				</Stack>
+				<Box sx={{ minWidth: 120 }} style={{marginBottom:"10px"}}>
+					<FormControl fullWidth>
+						<InputLabel id="demo-simple-select-label">
+							Level
+						</InputLabel>
+						<Select
+							labelId="demo-simple-select-label"
+							id="demo-simple-select"
+							value={level}
+							size={"small"}
+							label="Age"
+							onChange={handleChange}
+						>
+							<MenuItem value={"5"}>N5</MenuItem>
+							<MenuItem value={'4'}>N4</MenuItem>
+							<MenuItem value={'3'}>N3</MenuItem>
+							<MenuItem value={'2'}>N2</MenuItem>
+							<MenuItem value={'1'}>N1</MenuItem>
+						</Select>
+					</FormControl>
+				</Box>
 				{showKanjiCard ? (
 					<KanjiCard setShowKanjiCard={setShowKanjiCard} />
 				) : (

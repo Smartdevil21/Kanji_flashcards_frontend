@@ -14,7 +14,7 @@ const Sidebar: NextPage = () => {
 						<Link href='/profile'>Profile</Link>
 					</li>
 					<li className={Styles.sidebar_links}>
-						<Link href='/user-lists'>My Lists</Link>
+						<Link href='/user-lists/pratik'>My Lists</Link>
 					</li>
 					<li className={Styles.sidebar_links}>
 						<Link href='/practice'>Practice</Link>
