@@ -6,7 +6,7 @@ import { createContext, Dispatch, SetStateAction, useState } from 'react';
 
 export interface IStates   {
 	userLoggedIn:boolean;
-	practiceOpt:string[];
+	practiceOpt:string[];//possible values: kbfr, fbkr
 }
 
 const StatesContext = createContext<
@@ -14,7 +14,7 @@ const StatesContext = createContext<
 >({
 	states:{//initial value of states when the page is first loaded
 		userLoggedIn:false,
-		practiceOpt:['hiragana']
+		practiceOpt:['hiragana'],
 	},
 	setStates:()=>{}
 });

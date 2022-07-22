@@ -52,6 +52,7 @@ function CheckboxElement({
 					value="top"
 					control={
 						<Checkbox
+						sx={{'&.Mui-checked':{color:"#FF7D39"}}}
 						checked={selected.indexOf(opt)!==-1}
 							onChange={() => {
 								setChecked((prev) => !prev);

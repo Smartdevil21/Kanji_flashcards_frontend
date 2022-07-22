@@ -62,4 +62,13 @@
             }
         }
     }
+    .add_list_btn{
+        position: fixed;
+        bottom: 30px;
+        right: 40px;
+        button{
+            background-color: var(--orange);
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+    }
 }

@@ -1,0 +1,48 @@
+.mode_selection {
+	background-color: #f2f2f2;
+	width: 100%;
+	height: 90vh;
+	display: flex;
+	justify-content: flex-start;
+	padding: 10vh 30px 30px 30px;
+	align-items: center;
+	flex-direction: column;
+	font-family: var(--content_font);
+	position: relative;
+	h1 {
+		margin-bottom: 20px;
+	}
+	.classes {
+		margin-top: 20px;
+		width: 100%;
+		// background-color: red;
+		.classes_container {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			.checkbox {
+				margin-right: 20px;
+				background-color: #ededed;
+				box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+				border-radius: 10px;
+				padding-left: 10px;
+				margin-top: 10px;
+			}
+		}
+	}
+	.nxt {
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		a {
+			color: #f9f9f9;
+			text-decoration: none;
+			background-color: var(--orange);
+			text-transform: none;
+			button {
+				position: relative;
+				height: fit-content;
+			}
+		}
+	}
+}

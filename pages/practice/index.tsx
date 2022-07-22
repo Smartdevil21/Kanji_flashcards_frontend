@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Parent from '../../components/parent/Parent';
-import Styles from '../../styles/practice.module.scss';
+import Styles from '../../styles/practice/practice.module.scss';
 import CheckboxElement from '../../components/Checkbox/Checkbox';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 function Practice() {
 	const { states, setStates } = useContext(StatesContext);
-	const [mode, setMode] = useState('single-select');
+	const [mode, setMode] = useState('multi-select');
 
 	const handleChange = (
 		event: React.MouseEvent<HTMLElement>,

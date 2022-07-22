@@ -3,6 +3,10 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  /* color:#252525 */
+}
+h1,h2,h3,h4,h5,h6,p,article{
+  color: #252525;
 }
 .container_global{
   width: 100%;
