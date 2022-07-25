@@ -1,25 +1,24 @@
 .home_container {
-	background-color: #f2f2f2;
-	width: 100%;
-	height: 90vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	label{
+	width: 100%;
+	label {
 		font-family: var(--content_font);
 		font-size: small;
 		font-weight: bold;
 	}
-	select{
+	select {
 		background-color: #f2f2f2;
 		margin-bottom: 10px;
 	}
-	.kanji_card, .meaning_card {
+	.kanji_card,
+	.meaning_card {
 		min-width: 60%;
-        min-height: 60%;
+		min-height: 60%;
 		height: fit-content;
-        width: fit-content;
+		width: fit-content;
 		background: #e5e5e5;
 		border-radius: 10px;
 		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
@@ -35,15 +34,16 @@
 			font-size: 48px;
 		}
 	}
-    .meaning_card{
-		h3, p{
+	.meaning_card {
+		h3,
+		p {
 			// margin: 10px auto;
 			font-family: var(--content_font);
 		}
-		h3{
+		h3 {
 			margin: 10px auto;
 		}
-    }
+	}
 	.card_btns {
 		margin: 15px auto;
 		button {
@@ -53,9 +53,18 @@
 			border: 1.5px solid var(--black);
 			margin: 10px;
 
-            p{
-                white-space: nowrap;
-            }
+			p {
+				white-space: nowrap;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width:750px){
+	.home_container{
+		.kanji_card, .meaning_card{
+			width: 90%;
+			min-height: 100%;
 		}
 	}
 }

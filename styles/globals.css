@@ -3,6 +3,7 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  /* border: 1px solid red; */
   /* color:#252525 */
 }
 h1,h2,h3,h4,h5,h6,p,article{
@@ -20,4 +21,11 @@ h1,h2,h3,h4,h5,h6,p,article{
   --title_black: #252525;
   --grey: #959595;
   --orange :#FF7D39;
+}
+
+@media only screen and (max-width:750px){
+  html{
+    height: 100vh;
+    overflow-y: hidden;
+  }
 }

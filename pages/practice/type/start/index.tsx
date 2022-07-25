@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Parent from '../../../../components/parent/Parent';
 import { useRouter } from 'next/router';
 import Styles from '../../../../styles/practice/start.module.scss';
 import { FormControl, FormControlLabel, Checkbox, Stack } from '@mui/material';
 import { Icon } from '@iconify/react';
 import DangerousIcon from '@mui/icons-material/Dangerous';
+import { StatesContext } from '../../../_app';
 
 interface OptProps {
 	label: number;
@@ -32,6 +33,7 @@ function Option({ label }: OptProps) {
 
 function Game() {
 	const { query } = useRouter();
+	const {states, setStates} = useContext(StatesContext);
 	return (
 		<Parent>
 			<div className={Styles.game}>
@@ -72,17 +74,17 @@ function Game() {
 				<div className={Styles.question}>
 					<h1>Kanji Word</h1>
 					<div className={Styles.options}>
-						<Stack marginBottom={2} spacing={3} direction={'row'}>
+						<Stack marginBottom={2} spacing={states.windowWidth>750?5:3} direction={'row'}>
 							{[1, 2, 3].map((ele, index) => (
 								<Option label={ele} key={index} />
 							))}
 						</Stack>
-						<Stack marginBottom={2} spacing={3} direction={'row'}>
+						<Stack marginBottom={2} spacing={states.windowWidth>750?5:3} direction={'row'}>
 							{[1, 2, 3].map((ele, index) => (
 								<Option label={ele} key={index} />
 							))}
 						</Stack>
-						<Stack spacing={3} direction={'row'}>
+						<Stack spacing={states.windowWidth>750?5:3} direction={'row'}>
 							{[1, 2, 3].map((ele, index) => (
 								<Option label={ele} key={index} />
 							))}

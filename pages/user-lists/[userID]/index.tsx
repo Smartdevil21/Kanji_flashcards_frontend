@@ -1,8 +1,17 @@
-import { Stack, IconButton, Fab, Box } from '@mui/material';
-import React from 'react';
+import {
+	Stack,
+	IconButton,
+	Fab,
+	Box,
+	Modal,
+	TextField,
+	Button,
+} from '@mui/material';
+import React, { useState } from 'react';
 import Parent from '../../../components/parent/Parent';
 import Styles from '../../../styles/userLists.module.scss';
 import { Icon } from '@iconify/react';
+import AddList from '../../../components/Modals/AddList/AddList';
 
 function List() {
 	return (
@@ -31,6 +40,8 @@ function List() {
 }
 
 function UserLists() {
+	const [openAddListModal, setopenAddListModal] = useState(false);
+	const [listName, setListName] = useState('');
 	return (
 		<Parent>
 			<div className={Styles.userlists}>
@@ -45,7 +56,11 @@ function UserLists() {
 				</Stack>
 
 				<div className={Styles.add_list_btn}>
-					<IconButton>
+					<IconButton
+						onClick={() => {
+							setopenAddListModal(true);
+						}}
+					>
 						<Icon
 							icon="fluent:add-24-filled"
 							color="#f9f9f9"
@@ -53,6 +68,9 @@ function UserLists() {
 						/>
 					</IconButton>
 				</div>
+				<Modal open={openAddListModal}>
+					<AddList setopenAddListModal={setopenAddListModal} setListName={setListName} listName={listName} />
+				</Modal>
 			</div>
 		</Parent>
 	);

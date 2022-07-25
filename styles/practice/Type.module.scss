@@ -20,6 +20,8 @@
 			display: flex;
 			justify-content: flex-start;
 			align-items: center;
+			flex-flow: row;
+			flex-wrap: wrap;
 			.checkbox {
 				margin-right: 20px;
 				background-color: #ededed;
