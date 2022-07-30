@@ -1,10 +1,11 @@
 import { FormControlLabel, FormControl, Checkbox, Button } from '@mui/material';
 import Link from 'next/link';
-import React, { useState, useContext, Dispatch, SetStateAction } from 'react';
+import React, { useState, useContext, Dispatch, SetStateAction, useEffect } from 'react';
 import CheckboxElement from '../../../components/Checkbox/Checkbox';
 import Parent from '../../../components/parent/Parent';
 import Styles from '../../../styles/practice/Type.module.scss';
 import { StatesContext } from '../../_app';
+import { useRouter } from 'next/router';
 
 function CheckboxComp({
 	selected,
@@ -40,9 +41,17 @@ function CheckboxComp({
 }
 
 function TypeOfPractice() {
-	// const {states, setStates} = useContext(StatesContext);
+	const {states} = useContext(StatesContext);
 	const [selected, setSelected] = useState('kbm');
 	const [length, setLength] = useState('25');
+	const router = useRouter();
+
+	useEffect(()=>{
+		if(!states.username){
+			router.push('/');
+		}
+	}, [])
+
 	return (
 		<Parent>
 			<div className={Styles.mode_selection}>

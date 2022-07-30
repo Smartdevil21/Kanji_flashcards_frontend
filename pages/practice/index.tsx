@@ -8,8 +8,10 @@ import { StatesContext } from '../_app';
 import { Button, CircularProgress } from '@mui/material';
 import Link from 'next/link';
 import { getUserLists } from '../../typings/services/lists/getUserLists.service';
+import { useRouter } from 'next/router';
 
 function Practice() {
+	const router = useRouter();
 	const { states, setStates } = useContext(StatesContext);
 	const [mode, setMode] = useState('multi-select');
 	const [userListNames, setUserListNames] = useState<string[]>([]);
@@ -23,9 +25,11 @@ function Practice() {
 	};
 
 	const getUserListTrigger = async () => {
+		console.log(!!states.username);
+		if (!states.username) return router.push('/');
 		setLoading(true);
 		try {
-			const response = await getUserLists({uid:states.uid as string});
+			const response = await getUserLists({ uid: states.uid as string });
 			response.data.data.map((ele, index) => {
 				setUserListNames((prev) => {
 					if (prev.indexOf(ele.listName) === -1) {
@@ -36,7 +40,7 @@ function Practice() {
 			});
 		} catch (error) {
 			console.log(error);
-		};
+		}
 		setLoading(false);
 	};
 
@@ -69,7 +73,7 @@ function Practice() {
 					<div className={Styles.classes}>
 						<h3>Basic:</h3>
 						<div className={Styles.classes_container}>
-							<CheckboxElement
+							{/* <CheckboxElement
 								opt={'Hiragana'}
 								ans={''}
 								selected={states?.practiceOpt}
@@ -82,7 +86,7 @@ function Practice() {
 								selected={states?.practiceOpt}
 								setState={setStates}
 								mode={mode}
-							/>
+							/> */}
 							<CheckboxElement
 								opt={'Kanji[N5]'}
 								ans={''}
@@ -120,7 +124,7 @@ function Practice() {
 							/>
 						</div>
 					</div>
-					<br/>
+					<br />
 					<div className={Styles.classes}>
 						<h3>Your Lists</h3>
 						<div className={Styles.classes_container}>

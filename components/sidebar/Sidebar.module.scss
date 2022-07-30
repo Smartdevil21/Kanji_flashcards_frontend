@@ -48,7 +48,7 @@
 				position: absolute;
 				bottom: 30px;
 				right: 5%;
-				a{
+				a, button{
 					text-transform: none;
 					color: #f9f9f9;
 					background-color: var(--orange);
@@ -97,7 +97,7 @@
 					}
 				}
 				.logout {
-					bottom: 30px;
+					bottom: 70px;
 					right: 50%;
 					transform: translateX(50%);
 				}

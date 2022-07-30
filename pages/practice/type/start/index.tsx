@@ -81,16 +81,14 @@ function CreateOptions({
 										changeQuestion();
 									} else {
 										alert(
-											`Practice completed! \nYour accuracy was: ${
-												Math.round(
-													(counter.correct /
-														(counter.correct +
-															counter.wrong)) *
-														100
-												)
-											}%`
+											`Practice completed! \nYour accuracy was: ${Math.round(
+												(counter.correct /
+													(counter.correct +
+														counter.wrong)) *
+													100
+											)}%`
 										);
-										Router.push("/practice")
+										Router.push('/practice');
 									}
 								}, 1000);
 							} else {
@@ -138,7 +136,7 @@ function CreateOptions({
 }
 
 function Game() {
-	const { query } = useRouter();
+	const router = useRouter();
 	const { states } = useContext(StatesContext);
 	const [quesDetails, setQuesDetails] = useState<QuestionDetails>({
 		questionsKanjis: [],
@@ -179,6 +177,7 @@ function Game() {
 	const [allKanjis, setAllKanjis] = useState<KanjiEntry[]>([]);
 
 	const getAllKanjisOfSelectedLists = async () => {
+		if (!states.username) return router.push('/');
 		setLoading(true);
 		try {
 			const basicLists = {
@@ -247,7 +246,7 @@ function Game() {
 					)
 				];
 		}
-		if (query.m === 'kbm') {
+		if (router.query.m === 'kbm') {
 			allKanjis.map((item, index) => {
 				if (item === quesDetails.question) return;
 				kanjiMeaningsOrWordsArr.push(item.meaning);
@@ -274,7 +273,7 @@ function Game() {
 					return result;
 				}
 			}
-			if (query.m === 'kbm') {
+			if (router.query.m === 'kbm') {
 				const kanjiMeaning = getKanjiMeaning();
 				const q = Math.floor(
 					Math.random() * (kanjiMeaning.split(', ').length - 1)
@@ -305,7 +304,7 @@ function Game() {
 			arr.push(possibleOpt);
 		}
 		let ans: string = '';
-		if (query.m === 'kbm') {
+		if (router.query.m === 'kbm') {
 			ans = question?.meaning.split(', ')[
 				Math.floor(Math.random() * question?.meaning.split(', ').length)
 			] as string;
@@ -334,7 +333,7 @@ function Game() {
 		<Parent>
 			<div className={Styles.game}>
 				<h2>
-					{query.m === 'kbfr'
+					{router.query.m === 'kbfr'
 						? 'Guess the Kanji based on Furigana Reading.'
 						: 'Guess the Furigana reading based on Kanji.'}
 				</h2>
@@ -373,14 +372,14 @@ function Game() {
 						</p>
 					</Stack>
 					<p className={Styles.counter}>
-						{counter.count}/{query.l}
+						{counter.count}/{router.query.l}
 					</p>
 				</div>
 				{!loading ? (
 					start ? (
 						<div className={Styles.question}>
 							<h1>
-								{query.m === 'kbm'
+								{router.query.m === 'kbm'
 									? quesDetails.question?.word
 									: quesDetails.question.meaning}
 							</h1>
@@ -389,7 +388,7 @@ function Game() {
 									answer={quesDetails.answer}
 									changeQuestion={changeQuestion}
 									optArr={quesDetails.answerArr}
-									length={Number(query.l)}
+									length={Number(router.query.l)}
 									counter={counter}
 									setCounter={setCounter}
 								/>

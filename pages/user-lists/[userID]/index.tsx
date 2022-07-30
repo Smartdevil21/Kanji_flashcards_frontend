@@ -24,6 +24,7 @@ import { StatesContext } from '../../_app';
 import { getUserLists } from '../../../typings/services/lists/getUserLists.service';
 import { ListData } from '../../../typings/interfaces/lists/getUserLists.interface';
 import { updateList } from '../../../typings/services/lists/updateList.service';
+import { useRouter } from 'next/router';
 
 function List({
 	list,
@@ -105,6 +106,7 @@ function List({
 
 function UserLists() {
 	const { states, setStates } = useContext(StatesContext);
+	const router = useRouter();
 	const [openAddListModal, setopenAddListModal] = useState(false);
 	const [openEditModal, setOpenEditModal] = useState(false);
 	const [userListsDetails, setUserListsDetails] = useState<ListData[]>();
@@ -118,6 +120,7 @@ function UserLists() {
 	const [loading, setLoading] = useState(false);
 
 	const getUserListEntryDetails = async () => {
+		if (!states.username) return router.push('/');
 		setLoading(true);
 		try {
 			const response = await getUserLists({ uid: states.uid as string });

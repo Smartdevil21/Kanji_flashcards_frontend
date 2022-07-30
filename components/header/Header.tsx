@@ -18,7 +18,7 @@ const Header: NextPage = () => {
 				spacing={2}
 				justifyContent={'center'}
 			>
-				<div className={Styles.theme_toggler}></div>
+				{/* <div className={Styles.theme_toggler}></div> */}
 
 				{states.userLoggedIn && states.windowWidth > 750 ? (
 					<IconButton>P</IconButton>

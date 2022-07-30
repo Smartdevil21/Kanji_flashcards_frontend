@@ -22,6 +22,8 @@
 	.container {
 		.main {
 			left: 0px;
+			top: 70px;
+			height: calc(100vh - 70px);
 			width: 100%;
 			overflow-y: hidden;
 		}
