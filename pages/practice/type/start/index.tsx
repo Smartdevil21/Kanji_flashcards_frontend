@@ -404,7 +404,7 @@ function Game() {
 									setStart(true);
 								}, 1500);
 							}}
-							security={'restricted'}
+							style={{height:"fit-content"}}
 						>
 							Start
 						</Button>
