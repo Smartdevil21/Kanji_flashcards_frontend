@@ -36,6 +36,8 @@ function Signup() {
 					userLoggedIn: true,
 					uid: response.data.data._id,
 					email_verified: response.data.data?.emailVerified || false,
+					email: response.data.data?.email,
+					username: response.data.data?.username,
 				}));
 				Router.push('/');
 			} else {
