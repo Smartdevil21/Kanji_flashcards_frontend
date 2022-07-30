@@ -35,6 +35,7 @@
 
 @media only screen and (max-width:750px){
 	.contact{
+		height: calc(100vh - 70px);
 		.contact_fields{
 			width: 90%;
 		}

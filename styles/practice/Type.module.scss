@@ -51,6 +51,7 @@
 
 @media only screen and (max-width:750px){
 	.mode_selection{
+		height: calc(100vh - 70px);
 		.nxt{
 			position: fixed;
 		}
