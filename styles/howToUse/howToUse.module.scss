@@ -1,0 +1,35 @@
+.howToUse {
+	background-color: #f2f2f2;
+	width: 100%;
+	height: 90vh;
+	padding: 30px;
+	font-family: var(--parah_font);
+	h1 {
+		padding: 20px 0px;
+		color: var(--orange);
+	}
+	.guide_wrapper {
+        padding-bottom: 30px;
+		p {
+			padding: 10px 0px;
+		}
+		h2 {
+			padding: 15px 0px;
+		}
+		ol,
+		ul {
+			li {
+				list-style: none;
+                strong{
+                    margin-top: 10px;
+                }
+			}
+		}
+	}
+}
+
+@media only screen and (max-width:750px){
+	.howToUse{
+		padding: 20px;
+	}
+}

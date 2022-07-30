@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&family=Reggae+One&family=Sawarabi+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
 *{
   box-sizing: border-box;
   margin: 0px;
@@ -26,6 +27,7 @@ h1,h2,h3,h4,h5,h6,p,article{
   --content_font: 'Raleway', sans-serif;
   --japanese_font: 'Sawarabi Gothic', sans-serif;
   --title_font: 'Reggae One', cursive;
+  --parah_font:'Noto Sans', sans-serif;
   --black: #444;
   --title_black: #252525;
   --grey: #959595;

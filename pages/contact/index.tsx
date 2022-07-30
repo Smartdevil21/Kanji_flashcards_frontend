@@ -92,7 +92,7 @@ const Contact: NextPage = () => {
 											message: e.target.value,
 										}));
 									}}
-									variant={'filled'}
+									variant={'outlined'}
 									multiline
 									minRows={4}
 									size={'small'}

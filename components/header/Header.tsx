@@ -20,8 +20,8 @@ const Header: NextPage = () => {
 			>
 				{/* <div className={Styles.theme_toggler}></div> */}
 
-				{states.userLoggedIn && states.windowWidth > 750 ? (
-					<IconButton>P</IconButton>
+				{states.userLoggedIn && states.windowWidth > 750 &&states.username? (
+					<IconButton>{states.username[0]}</IconButton>
 				) : (
 					<div className={Styles.log_btns}>
 						<Stack spacing={2} direction={'row'}>
