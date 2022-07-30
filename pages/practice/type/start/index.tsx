@@ -404,6 +404,7 @@ function Game() {
 									setStart(true);
 								}, 1500);
 							}}
+							security={'restricted'}
 						>
 							Start
 						</Button>
