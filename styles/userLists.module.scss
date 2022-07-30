@@ -78,9 +78,7 @@
 @media only screen and (max-width:750px){
     .userlists{
         height: calc(100vh - 70px);
-        // height: fit-content;
-        // overflow-y: none;
-        padding: 5vh 0px 0px 0px;
+        padding: 5vh 0px 10vh 0px;
         .list_container{
             justify-content: center;
             align-items: center;
