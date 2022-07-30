@@ -86,8 +86,9 @@
 		width: 100vw;
 		overflow-x: hidden;
 		padding: 40px 20px 20px 20px;
-		overflow-y: scroll;
-		height: calc(100vh - 70px);
+		// overflow-y: scroll;
+		min-height: calc(100vh - 70px);
+		height: fit-content;
 		h2{
 			font-size: 18px;
 		}

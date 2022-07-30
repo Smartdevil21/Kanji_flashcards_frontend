@@ -28,7 +28,8 @@
 		.main {
 			left: 0px;
 			top: 70px;
-			height: calc(100vh - 70px);
+			height: fit-content;
+			overflow-y: none;
 			width: 100%;
 		}
 	}

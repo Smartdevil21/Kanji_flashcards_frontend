@@ -36,7 +36,7 @@ const Sidebar: NextPage = () => {
 				height:
 					states.windowWidth < 750
 						? states.openHam
-							? 'calc(100% - 70px)'
+							? 'calc(100vh - 70px)'
 							: '00vh'
 						: '',
 			}}
