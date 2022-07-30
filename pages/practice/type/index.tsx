@@ -62,7 +62,7 @@ function TypeOfPractice() {
 						<CheckboxComp
 							selected={selected}
 							setSelected={setSelected}
-							label={'Guess The Kanji based on its meaning.'}
+							label={'Guess the Kanji by its meaning.'}
 							opt={'kbm'}
 						/>
 					</div>

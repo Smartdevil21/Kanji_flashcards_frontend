@@ -34,7 +34,7 @@ const StatesContext = createContext<{
 	states: {
 		//initial value of states when the page is first loaded
 		userLoggedIn: false,
-		practiceOpt: ['hiragana'],
+		practiceOpt: ['Kanji[N5]'],
 		openHam: false,
 		windowWidth: 0,
 		email_verified: false,
@@ -49,7 +49,7 @@ const StatesContext = createContext<{
 function MyApp({ Component, pageProps }: AppProps) {
 	const [states, setStates] = useState({
 		userLoggedIn: false,
-		practiceOpt: ['Hiragana'],
+		practiceOpt: ['Kanji[N5]'],
 		openHam: false,
 		windowWidth: 0,
 		email_verified: false,
