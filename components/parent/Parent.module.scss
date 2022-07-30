@@ -1,8 +1,9 @@
 .container {
 	width: 100%;
-	min-height: 100vh;
+	height: 100vh;
 	// background-color: red;
 	display: flex;
+	overflow: hidden;
 	.main {
 		position: absolute;
 		left: 25%;
@@ -29,7 +30,6 @@
 			top: 70px;
 			height: calc(100vh - 70px);
 			width: 100%;
-			overflow-y: scroll;
 		}
 	}
 }
