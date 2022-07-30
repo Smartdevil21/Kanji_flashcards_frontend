@@ -29,6 +29,7 @@ const Home: NextPage = () => {
 	const [selectList, setSelectList] = useState('Bookmarks');
 	const [wordList, setWordList] = useState<KanjiEntry[]>([]);
 	const [loading, setLoading] = useState(false);
+	const [bookmarking, setBookmarking] = useState(false);
 	const [counter, setCounter] = useState({
 		pointer: 0,
 		history: [0],
@@ -45,7 +46,9 @@ const Home: NextPage = () => {
 			const response1 = await getAllKanjisByLevel({ level });
 			setWordList(response1.data.data);
 			if (states.userLoggedIn && states.email_verified) {
-				const response2 = await getUserLists({uid: states.uid as string});
+				const response2 = await getUserLists({
+					uid: states.uid as string,
+				});
 				const listNames: string[] = [];
 				response2.data.data.map((ele, index) => {
 					listNames.push(ele.listName);
@@ -60,6 +63,7 @@ const Home: NextPage = () => {
 	}
 
 	async function addToList({ listName }: { listName: string }) {
+		setBookmarking(true);
 		try {
 			const response = await updateList({
 				word: wordList[counter.pointer].word,
@@ -70,7 +74,8 @@ const Home: NextPage = () => {
 			console.log(response);
 		} catch (error) {
 			console.log(error);
-		}
+		};
+		setBookmarking(false);
 	}
 
 	useEffect(() => {
@@ -122,37 +127,51 @@ const Home: NextPage = () => {
 						)}
 						<div className={Styles.card_btns}>
 							{states.email_verified && states.userLoggedIn && (
-								<FormControl fullWidth>
-									<InputLabel id="demo-simple-select-label">
-										Add to
-									</InputLabel>
-									<Select
-										labelId="demo-simple-select-label"
-										id="demo-simple-select"
-										value={'Bookmarks'}
-										size={'small'}
-										label="Add to"
-										// onChange={handleChange}
-									>
-										{states.listNames.map((ele, index) => (
-											<MenuItem
-												key={index}
-												onClick={() => {
-													addToList({
-														listName: ele,
-													});
-												}}
-												value={ele}
+								<>
+									{bookmarking ? (
+										<CircularProgress
+											style={{
+												color: 'var(--orange)',
+												marginRight: '20px',
+											}}
+										/>
+									) : (
+										<FormControl fullWidth>
+											<InputLabel id="demo-simple-select-label">
+												Add to
+											</InputLabel>
+											<Select
+												labelId="demo-simple-select-label"
+												id="demo-simple-select"
+												value={'Bookmarks'}
+												size={'small'}
+												label="Add to"
+												// onChange={handleChange}
 											>
-												{ele}
-											</MenuItem>
-										))}
-									</Select>
-								</FormControl>
+												{states.listNames.map(
+													(ele, index) => (
+														<MenuItem
+															key={index}
+															onClick={() => {
+																addToList({
+																	listName:
+																		ele,
+																});
+															}}
+															value={ele}
+														>
+															{ele}
+														</MenuItem>
+													)
+												)}
+											</Select>
+										</FormControl>
+									)}
+								</>
 							)}
 							<Button
 								onClick={() => {
-									if(!showKanjiCard){
+									if (!showKanjiCard) {
 										setShowKanjiCard(true);
 									}
 									setCounter((prev) => ({

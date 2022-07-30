@@ -11,7 +11,7 @@ const Header: NextPage = () => {
 
 	return (
 		<header className={Styles.header}>
-			<h1>Kanji Flashcards</h1>
+			<Link href={'/'} passHref><h1>Kanji Flashcards</h1></Link>
 			<Stack
 				direction={'row'}
 				alignItems={'center'}
