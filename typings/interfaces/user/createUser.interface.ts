@@ -17,4 +17,5 @@ interface ResponseData {
 export interface CreateUserResponse {
 	success: boolean;
 	data: ResponseData;
+	t?:string;
 }

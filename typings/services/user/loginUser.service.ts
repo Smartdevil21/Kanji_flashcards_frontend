@@ -9,7 +9,7 @@ export function loginUser({
 	username,
 }: LoginUserRequest): Promise<AxiosResponse<LoginUserResponse>> {
 	const config: AxiosRequestConfig = {
-		url: `${process.env.BASE_URl}/user/login`,
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/user/login`,
 		method: 'POST',
 		data: {
 			username,

@@ -1,0 +1,23 @@
+.login{
+    font-family: var(--content_font);
+    h3{
+        font-family: var(--title_font);
+        padding-bottom: 20px;
+    }
+    .login_btn{
+        text-align: right;
+        button{
+            width: fit-content;
+			height: fit-content;
+			padding-left: 20px;
+			padding-right: 20px;
+			background-color: var(--orange);
+			color: #f9f9f9;
+			text-transform: none;
+            margin-bottom: 10px;
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+}

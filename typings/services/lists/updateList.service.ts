@@ -9,10 +9,11 @@ export function updateList({
 	newName,
 	word,
 	action,
-	listID,
+	listName,
+	uid
 }: UpdateListRequest): Promise<AxiosResponse<UpdateListResponse>> {
 	const config: AxiosRequestConfig = {
-		url: `${process.env.BASE_URL}/list/update/${action}?listID=${listID}`,
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/list/update/${action}?ln=${listName}&uid=${uid}`,
 		method: 'POST',
 		data: {
 			newName,

@@ -16,7 +16,7 @@
 	.kanji_card,
 	.meaning_card {
 		min-width: 60%;
-		min-height: 60%;
+		min-height: 50vh;
 		height: fit-content;
 		width: fit-content;
 		background: #e5e5e5;
@@ -46,6 +46,9 @@
 	}
 	.card_btns {
 		margin: 15px auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		button {
 			text-transform: none;
 			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);

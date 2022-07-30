@@ -1,8 +1,3 @@
-export interface LoginUserRequest {
-	username: string;
-	password: string;
-}
-
 interface Data {
 	_id: string;
 	__v: number;
@@ -12,8 +7,12 @@ interface Data {
 	password: string;
 }
 
-export interface LoginUserResponse {
-	success: boolean;
+export interface LoginWithTokenRequest{
+	token:string
+}
+
+export interface LoginWithTokenResponse{
+    success: boolean;
 	data?: Data;
 	t?:string;
 }

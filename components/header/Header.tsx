@@ -4,6 +4,7 @@ import { NextPage } from 'next';
 import Styles from './Header.module.scss';
 import { StatesContext } from '../../pages/_app';
 import { Button } from '@mui/material';
+import Link from 'next/link';
 
 const Header: NextPage = () => {
 	const { states, setStates } = useContext(StatesContext);
@@ -24,8 +25,8 @@ const Header: NextPage = () => {
 				) : (
 					<div className={Styles.log_btns}>
 						<Stack spacing={2} direction={'row'}>
-							<Button>Log in</Button>
-							<Button>Sign Up</Button>
+							<Link href={'/login'} passHref ><Button className={Styles.login_btn}>Log in</Button></Link>
+							<Link href={'/sign-up'} passHref><Button>Sign Up</Button></Link>
 						</Stack>
 					</div>
 				)}

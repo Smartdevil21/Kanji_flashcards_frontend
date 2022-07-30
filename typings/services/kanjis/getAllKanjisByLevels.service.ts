@@ -10,7 +10,7 @@ export function getAllKanjisByLevel({
 	AxiosResponse<GetAllKanjisByLevelResponse>
 > {
 	const config: AxiosRequestConfig = {
-		url: `${process.env.BASE_URL}/kanjis?level=${level}`,
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/kanjis?level=${level}`,
 		method: 'GET',
 	};
 	return axios.request<GetAllKanjisByLevelResponse>(config);

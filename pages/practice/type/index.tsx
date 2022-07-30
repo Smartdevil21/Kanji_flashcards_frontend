@@ -41,7 +41,7 @@ function CheckboxComp({
 
 function TypeOfPractice() {
 	// const {states, setStates} = useContext(StatesContext);
-	const [selected, setSelected] = useState('kbfr');
+	const [selected, setSelected] = useState('kbm');
 	const [length, setLength] = useState('25');
 	return (
 		<Parent>
@@ -53,8 +53,8 @@ function TypeOfPractice() {
 						<CheckboxComp
 							selected={selected}
 							setSelected={setSelected}
-							label={'Guess The Kanji based on Furigana reading.'}
-							opt={'kbfr'}
+							label={'Guess The Kanji based on its meaning.'}
+							opt={'kbm'}
 						/>
 					</div>
 				</div>
@@ -64,8 +64,8 @@ function TypeOfPractice() {
 						<CheckboxComp
 							selected={selected}
 							setSelected={setSelected}
-							label={'Guess The Furigana reading based on Kanji.'}
-							opt={'frbk'}
+							label={'Guess the meaning of Kanji.'}
+							opt={'mok'}
 						/>
 					</div>
 				</div>

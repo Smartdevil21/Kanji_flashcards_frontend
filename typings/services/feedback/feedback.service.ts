@@ -10,7 +10,7 @@ export function feedback({
 	message,
 }: FeedbackRequest): Promise<AxiosResponse<FeedbackResponse>> {
 	const config: AxiosRequestConfig = {
-		url: `${process.env.BASE_URL}/sendFeedback`,
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/sendFeedback`,
 		method: 'POST',
 		data: {
 			username,

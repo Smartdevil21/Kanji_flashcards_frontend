@@ -1,0 +1,34 @@
+.entrance{
+    width: 100%;
+    min-height: 100vh;
+    background: #f9f9f9;
+    display: flex;
+    .bg{
+        width: 30%;
+        height: 100vh;
+        background-image: url(../../assets/login_bg.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .wrapper{
+        width: 70%;
+        min-height: 100vh;
+        height: fit-content;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width:750px){
+    .entrance{
+        .bg{
+            display: none;
+        }
+        .wrapper{
+            width: 100%;
+        }
+    }
+}

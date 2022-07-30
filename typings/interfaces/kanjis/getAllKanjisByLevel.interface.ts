@@ -1,30 +1,9 @@
-interface Kanji{
-    on_reading?:{
-        example?:{
-            eg?:string;
-            meaning?:string;
-            pronounciation?:string;
-        };
-        reading?:string;
-    },
-    kun_reading?:{
-        example?:{
-            eg?:string;
-            meaning?:string;
-            pronounciation?:string;
-        };
-        reading?:string;
-    },
-    _id:string;
-    word:string;
-    level:number;
-    __v:number
-}
+import { KanjiEntry } from "./kanjiList.interface";
 
 export interface GetAllKanjisByLevelResponse{
     success:boolean;
     level:string;
-    data:Kanji[];
+    data:KanjiEntry[];
 };
 
 export interface GetAllKanjisByLevelRequest{

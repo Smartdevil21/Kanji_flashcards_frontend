@@ -1,15 +1,33 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import Styles from './AddList.module.scss';
-import { Button, IconButton, TextField } from '@mui/material';
+import { Button, CircularProgress, IconButton, TextField } from '@mui/material';
 import { Icon } from '@iconify/react';
+import { createList } from '../../../typings/services/lists/createList.service';
+import { StatesContext } from '../../../pages/_app';
 
 interface Props {
 	setopenAddListModal: Dispatch<SetStateAction<boolean>>;
-	setListName: Dispatch<SetStateAction<string>>;
-	listName: string;
 }
 
-function AddList({ listName, setListName, setopenAddListModal }: Props) {
+function AddList({ setopenAddListModal }: Props) {
+	const { states } = useContext(StatesContext);
+	const [loading, setLoading] = useState(false);
+	const [listName, setListName] = useState('');
+
+	const createListTrigger = async () => {
+		setLoading(true);
+		try {
+			const response = await createList({
+				ln: listName,
+				uid: states.uid as string,
+			});
+			setopenAddListModal((prev) => !prev);
+		} catch (error) {
+			console.log(error);
+		}
+		setLoading(false);
+	};
+
 	return (
 		<div className={Styles.addList}>
 			<div className={Styles.closeBtn}>
@@ -34,7 +52,22 @@ function AddList({ listName, setListName, setopenAddListModal }: Props) {
 					autoFocus
 				/>
 				<div className={Styles.submitBtn}>
-					<Button>Add</Button>
+					<Button
+						onClick={createListTrigger}
+						style={{ pointerEvents: loading ? 'none' : 'all' }}
+					>
+						{loading ? (
+							<CircularProgress
+								style={{
+									color: '#f9f9f9',
+									width: '24px',
+									height: '24px',
+								}}
+							/>
+						) : (
+							'Create'
+						)}
+					</Button>
 				</div>
 			</div>
 		</div>

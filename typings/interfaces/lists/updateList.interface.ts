@@ -1,8 +1,9 @@
 export interface UpdateListRequest{
     word?:string;
     newName?:string;
-    listID:string;
+    listName:string;
     action: 'add'|'deleteItem'|'changeName'|'deleteList';
+    uid?:string;
 };
 
 export interface UpdateListResponse{
