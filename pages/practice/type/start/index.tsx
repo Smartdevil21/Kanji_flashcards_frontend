@@ -61,8 +61,8 @@ function CreateOptions({
 									if (counter < length) {
 										setSelectedAns('');
 										changeQuestion();
-									}else{
-										alert("Great Job!")
+									} else {
+										alert('Great Job!');
 									}
 								}, 1000);
 							}
@@ -223,7 +223,6 @@ function Game() {
 		}
 		function getArrItem() {
 			let opt: string = '';
-			//change it here!
 			function getKanjiMeaning() {
 				let result =
 					kanjiMeaningsOrWordsArr[
@@ -238,11 +237,20 @@ function Game() {
 					return result;
 				}
 			}
-			const kanjiMeaning = getKanjiMeaning();
-			const q = Math.floor(
-				Math.random() * (kanjiMeaning.split(', ').length - 1)
-			);
-			opt = kanjiMeaning.split(', ')[q];
+			if (query.m === 'kbm') {
+				const kanjiMeaning = getKanjiMeaning();
+				const q = Math.floor(
+					Math.random() * (kanjiMeaning.split(', ').length - 1)
+				);
+				opt = kanjiMeaning.split(', ')[q];
+			} else {
+				opt =
+					kanjiMeaningsOrWordsArr[
+						Math.floor(
+							Math.random() * kanjiMeaningsOrWordsArr.length
+						)
+					];
+			}
 			// //console.log(`Sentence ${kanjiMeaning} and choosed ${q} ie ${opt}`);
 			if (arr.indexOf(opt) !== -1) {
 				getArrItem();
@@ -259,9 +267,14 @@ function Game() {
 			// console.log('');
 			arr.push(possibleOpt);
 		}
-		const ans = question?.meaning.split(', ')[
-			Math.floor(Math.random() * question?.meaning.split(', ').length)
-		] as string;
+		let ans: string = '';
+		if (query.m === 'kbm') {
+			ans = question?.meaning.split(', ')[
+				Math.floor(Math.random() * question?.meaning.split(', ').length)
+			] as string;
+		}else{
+			ans = question.word;
+		}
 		arr.splice(Math.floor(Math.random() * 7), 0, ans);
 		setCounter((prev) => (prev += 1));
 		setQuesDetails((prev) => ({
@@ -329,7 +342,7 @@ function Game() {
 				{!loading ? (
 					start ? (
 						<div className={Styles.question}>
-							<h1>{quesDetails.question?.word}</h1>
+							<h1>{query.m==="kbm"?quesDetails.question?.word:quesDetails.question.meaning}</h1>
 							<div className={Styles.options}>
 								<CreateOptions
 									answer={quesDetails.answer}
