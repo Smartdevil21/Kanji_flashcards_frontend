@@ -1,15 +1,41 @@
-import { Button, Stack, TextField } from '@mui/material';
+import { Button, CircularProgress, Stack, TextField } from '@mui/material';
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Parent from '../../components/parent/Parent';
 import Styles from '../../styles/contact/contact.module.scss';
+import { StatesContext } from '../_app';
+import { feedback } from '../../typings/services/feedback/feedback.service';
 
 const Contact: NextPage = () => {
+	const { states } = useContext(StatesContext);
+	const [loading, setLoading] = useState(false);
 	const [contactMsg, setContactMsg] = useState({
-		username: '',
-		email: '',
+		username: states.username || '',
+		email: states.email || '',
 		message: '',
 	});
+
+	const feedBackTrigger = async () => {
+		setLoading(true);
+		try {
+			if (
+				contactMsg.username === '' ||
+				contactMsg.email === '' ||
+				contactMsg.message === ''
+			) {
+				alert('Provide proper details!');
+				throw new Error('Provide proper details!');
+			}
+			const response = await feedback(contactMsg);
+			alert('Thanks! We appriciate your submission!');
+			setContactMsg((prev) => ({ ...prev, message: '' }));
+			console.log(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+		setLoading(false);
+	};
+
 	return (
 		<>
 			<Parent>
@@ -20,9 +46,9 @@ const Contact: NextPage = () => {
 						feedback/suggesstions/bugs reports...
 					</p>
 					<div className={Styles.contact_fields}>
-						<h3>
+						{/* <h3>
 							(Please provide appropriate and accurate details.)
-						</h3>
+						</h3> */}
 						<form>
 							<Stack direction={'column'} spacing={2}>
 								<TextField
@@ -30,7 +56,7 @@ const Contact: NextPage = () => {
 									label="Username"
 									required
 									value={contactMsg.username}
-									autoFocus
+									autoFocus={!states.username}
 									onChange={(e) => {
 										setContactMsg((prev) => ({
 											...prev,
@@ -59,6 +85,7 @@ const Contact: NextPage = () => {
 									label="Feedback"
 									required
 									value={contactMsg.message}
+									autoFocus={!!states.username}
 									onChange={(e) => {
 										setContactMsg((prev) => ({
 											...prev,
@@ -72,7 +99,24 @@ const Contact: NextPage = () => {
 								/>
 							</Stack>
 							<div className={Styles.submit_btn}>
-								<Button>Submit</Button>
+								<Button
+									onClick={feedBackTrigger}
+									style={{
+										pointerEvents: loading ? 'none' : 'all',
+									}}
+								>
+									{loading ? (
+										<CircularProgress
+											style={{
+												width: '24px',
+												height: '24px',
+												color: '#f9f9f9',
+											}}
+										/>
+									) : (
+										'Submit'
+									)}
+								</Button>
 							</div>
 						</form>
 					</div>

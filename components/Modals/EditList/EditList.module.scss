@@ -34,3 +34,14 @@
         }
     }
 }
+
+@media only screen and (max-width:750px){
+    .wrapper{
+        .edit_list_modal{
+            width: 95%;
+            min-height: 50vh;
+            height: fit-content;
+            max-height: 90vh;
+        }
+    }
+}

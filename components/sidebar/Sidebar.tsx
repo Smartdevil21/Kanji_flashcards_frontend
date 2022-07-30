@@ -10,7 +10,7 @@ const cookieCutter = require('cookie-cutter');
 
 const Sidebar: NextPage = () => {
 	const { states, setStates } = useContext(StatesContext);
-
+	const pagename = Router.pathname.split('/')[1];
 	function closeHam() {
 		if (window.innerWidth > 750) return;
 		setStates((prev) => ({ ...prev, openHam: false }));
@@ -18,8 +18,15 @@ const Sidebar: NextPage = () => {
 
 	function logout() {
 		cookieCutter.set('t', '', { expires: new Date(0) });
-		setStates((prev) => ({ ...prev, userLoggedIn: false, uid: '' }));
+		setStates((prev) => ({
+			...prev,
+			userLoggedIn: false,
+			uid: '',
+			username: '',
+			email: '',
+		}));
 		Router.push('/');
+		closeHam();
 	}
 
 	return (
@@ -38,46 +45,53 @@ const Sidebar: NextPage = () => {
 				<ul>
 					<li
 						onClick={closeHam}
-						className={`${Styles.sidebar_links} ${Styles.sidebar_link_active}`}
+						className={`${Styles.sidebar_links} ${
+							pagename === '' && Styles.sidebar_link_active
+						}`}
 					>
 						<Link href="/">Home</Link>
 					</li>
 					{/* <li className={Styles.sidebar_links}>
 						<Link href='/profile'>Profile</Link>
 					</li> */}
-					{(states.userLoggedIn && states.email_verified) && (
+					{states.userLoggedIn && states.email_verified && (
 						<>
 							<li
 								onClick={closeHam}
-								className={Styles.sidebar_links}
+								className={`${Styles.sidebar_links} ${
+									pagename === 'user-lists' && Styles.sidebar_link_active
+								}`}
 							>
-								<Link href={`/user-lists/${states.uid}`}>My Lists</Link>
+								<Link href={`/user-lists/${states.uid}`}>
+									My Lists
+								</Link>
 							</li>
 							<li
 								onClick={closeHam}
-								className={Styles.sidebar_links}
+								className={`${Styles.sidebar_links} ${
+									pagename === 'practice' && Styles.sidebar_link_active
+								}`}
 							>
 								<Link href="/practice">Practice</Link>
 							</li>
 						</>
 					)}
-					<li onClick={closeHam} className={Styles.sidebar_links}>
+					<li onClick={closeHam} className={`${Styles.sidebar_links} ${
+							pagename === 'contact' && Styles.sidebar_link_active
+						}`}>
 						<Link href="/contact">Contact</Link>
 					</li>
 					<li
 						onClick={closeHam}
-						className={`${Styles.sidebar_links}`}
+						className={`${`${Styles.sidebar_links} ${
+							pagename === 'how-to-use' && Styles.sidebar_link_active
+						}`}`}
 					>
 						<Link href="/how-to-use">How to use</Link>
 					</li>
 					<li className={`${Styles.sidebar_links} ${Styles.logout}`}>
 						{states.userLoggedIn ? (
 							<Button
-								style={{
-									textTransform: 'none',
-									fontSize: 18,
-									color: 'var(--grey)',
-								}}
 								onClick={logout}
 							>
 								<Icon icon="mdi:logout" />
@@ -90,8 +104,8 @@ const Sidebar: NextPage = () => {
 									alignItems={'center'}
 									spacing={2}
 								>
-									<Button>Login</Button>
-									<Button>Signup</Button>
+									<Link href={'/login'} passHref><Button onClick={closeHam}>Login</Button></Link>
+									<Link href={'/sign-up'} passHref><Button onClick={closeHam}>Signup</Button></Link>
 								</Stack>
 							)
 						)}

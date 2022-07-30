@@ -9,7 +9,7 @@ import Router from 'next/router';
 const cookieCutter = require('cookie-cutter');
 
 function Login() {
-	const {states, setStates} = useContext(StatesContext);
+	const { states, setStates } = useContext(StatesContext);
 	const [loading, setLoading] = useState(false);
 	const [loginDetails, setLoginDetails] = useState({
 		username: '',
@@ -20,15 +20,22 @@ function Login() {
 		setLoading(true);
 		try {
 			const response = await loginUser(loginDetails);
-			alert("Welcome!");
+			alert('Welcome!');
 			cookieCutter.set('t', response.data.t);
-			setStates(prev=>({...prev, uid: response.data.data?._id, userLoggedIn:true, email_verified:response.data.data?.emailVerified || false}));
+			setStates((prev) => ({
+				...prev,
+				uid: response.data.data?._id,
+				userLoggedIn: true,
+				email_verified: response.data.data?.emailVerified || false,
+				email: response.data.data?.email,
+				username: response.data.data?.username,
+			}));
 			Router.push('/');
 			// console.log(response);
 		} catch (error) {
-			alert("Username or Passsword is incorrect!")
+			alert('Username or Passsword is incorrect!');
 			console.log(error);
-		};
+		}
 		setLoading(false);
 	}
 
@@ -63,7 +70,19 @@ function Login() {
 						}}
 					/>
 					<div className={Styles.login_btn}>
-						<Button onClick={loginFunc}>{loading?<CircularProgress style={{color:"#f9f9f9", width:'24px', height:'24px'}} />:"Login"}</Button>
+						<Button onClick={loginFunc}>
+							{loading ? (
+								<CircularProgress
+									style={{
+										color: '#f9f9f9',
+										width: '24px',
+										height: '24px',
+									}}
+								/>
+							) : (
+								'Login'
+							)}
+						</Button>
 						<p>
 							{/* eslint-disable-next-line react/no-unescaped-entities */}
 							Don't have an account?{' '}

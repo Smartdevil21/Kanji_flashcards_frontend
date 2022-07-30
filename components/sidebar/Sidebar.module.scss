@@ -35,17 +35,24 @@
 			.sidebar_links {
 				a {
 					color: var(--grey);
+					transition: 0.3 ease-in-out;
 				}
 			}
 			.sidebar_link_active {
 				a {
 					color: var(--orange);
+					transition: 0.3 ease-in-out;
 				}
 			}
 			.logout {
 				position: absolute;
 				bottom: 30px;
 				right: 5%;
+				a{
+					text-transform: none;
+					color: #f9f9f9;
+					background-color: var(--orange);
+				}
 			}
 		}
 	}

@@ -12,6 +12,7 @@
 	overflow-y: scroll;
 	h2 {
 		margin-bottom: 10px;
+		text-align: center;
 	}
 	.score {
 		width: fit-content;
@@ -55,7 +56,7 @@
 			border: 1px solid #c0c0c0;
 			flex-flow: row;
 			flex-wrap: wrap;
-			padding: 20px;
+			padding: 30px 10px 20px 20px;
 			border-radius: 10px;
 				.option {
 					min-width: 30%;
@@ -80,17 +81,26 @@
 
 @media only screen and (max-width: 750px) {
 	.game {
+		width: 100vw;
+		overflow-x: hidden;
+		h2{
+			font-size: 18px;
+		}
 		.question {
 			width: 100vw;
 			height: fit-content;
 			h1 {
 				font-size: 24px;
+				text-align: center;
 			}
 			.options {
-				width: 100vw;
+				width: 90vw;
 				height: fit-content;
 				justify-content: center;
 				align-items: center;
+				.option{
+					width: 40%;
+				}
 			}
 		}
 	}

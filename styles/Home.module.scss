@@ -39,6 +39,7 @@
 		p {
 			// margin: 10px auto;
 			font-family: var(--content_font);
+			text-align: center;
 		}
 		h3 {
 			margin: 10px auto;
@@ -67,7 +68,13 @@
 	.home_container{
 		.kanji_card, .meaning_card{
 			width: 90%;
-			min-height: 100%;
+			height: fit-content;
+		}
+		.kanji_card{
+			min-height: 90%;
+		}
+		.meaning_card{
+			min-height: 70%;
 		}
 	}
 }

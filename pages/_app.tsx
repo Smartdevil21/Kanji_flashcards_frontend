@@ -23,6 +23,8 @@ export interface IStates {
 	uid?: string;
 	email_verified: boolean;
 	listNames: string[];
+	username?:string;
+	email?:string
 }
 
 const StatesContext = createContext<{
@@ -38,6 +40,8 @@ const StatesContext = createContext<{
 		email_verified: false,
 		listNames: ['Bookmarks'],
 		uid: '',
+		username:'',
+		email:''
 	},
 	setStates: () => {},
 });
@@ -49,7 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		openHam: false,
 		windowWidth: 0,
 		email_verified: false,
-		listNames: ['Bookmarks'],
+		listNames: ['Bookmarks']
 	});
 
 	const [loading, setLoading] = useState(true);
@@ -65,6 +69,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 					userLoggedIn: true,
 					email_verified: !!response.data.data?.emailVerified,
 					uid: response.data.data?._id,
+					username: response.data.data?.username,
+					email:response.data.data?.email
 				}));
 			} catch (error) {
 				console.log(error);

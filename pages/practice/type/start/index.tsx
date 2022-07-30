@@ -37,7 +37,18 @@ interface CreateOptProps {
 	changeQuestion: () => void;
 	answer: string;
 	length: number;
-	counter: number;
+	counter: {
+		count: number;
+		correct: number;
+		wrong: number;
+	};
+	setCounter: React.Dispatch<
+		React.SetStateAction<{
+			count: number;
+			correct: number;
+			wrong: number;
+		}>
+	>;
 }
 
 function CreateOptions({
@@ -46,8 +57,10 @@ function CreateOptions({
 	answer,
 	length,
 	counter,
+	setCounter,
 }: CreateOptProps) {
 	const [selectedAns, setSelectedAns] = useState('');
+	const Router = useRouter();
 
 	function Opt({ opt }: { opt: string }) {
 		return (
@@ -58,13 +71,33 @@ function CreateOptions({
 							setSelectedAns(opt);
 							if (answer === opt) {
 								setTimeout(() => {
-									if (counter < length) {
+									if (counter.count < length) {
+										setCounter((prev) => ({
+											...prev,
+											count: prev.count + 1,
+											correct: prev.correct + 1,
+										}));
 										setSelectedAns('');
 										changeQuestion();
 									} else {
-										alert('Great Job!');
+										alert(
+											`Practice completed! \nYour accuracy was: ${
+												Math.round(
+													(counter.correct /
+														(counter.correct +
+															counter.wrong)) *
+														100
+												)
+											}%`
+										);
+										Router.push("/practice")
 									}
 								}, 1000);
+							} else {
+								setCounter((prev) => ({
+									...prev,
+									wrong: prev.wrong + 1,
+								}));
 							}
 						}}
 						control={
@@ -138,7 +171,11 @@ function Game() {
 	const [loading, setLoading] = useState(false);
 	const [coveredQuestions, setCoveredQuestions] = useState<string[]>([]);
 	const [start, setStart] = useState(false);
-	const [counter, setCounter] = useState(0);
+	const [counter, setCounter] = useState({
+		count: 0,
+		correct: 0,
+		wrong: 0,
+	});
 	const [allKanjis, setAllKanjis] = useState<KanjiEntry[]>([]);
 
 	const getAllKanjisOfSelectedLists = async () => {
@@ -272,11 +309,11 @@ function Game() {
 			ans = question?.meaning.split(', ')[
 				Math.floor(Math.random() * question?.meaning.split(', ').length)
 			] as string;
-		}else{
+		} else {
 			ans = question.word;
 		}
 		arr.splice(Math.floor(Math.random() * 7), 0, ans);
-		setCounter((prev) => (prev += 1));
+		// setCounter((prev) => (prev += 1));
 		setQuesDetails((prev) => ({
 			...prev,
 			question,
@@ -319,7 +356,7 @@ function Game() {
 									}}
 									icon="charm:tick"
 								/>
-								: 00
+								: {counter.correct}
 							</span>
 						</p>
 						<p>
@@ -331,18 +368,22 @@ function Game() {
 									}}
 									icon="akar-icons:cross"
 								/>
-								: 00
+								: {counter.wrong}
 							</span>
 						</p>
 					</Stack>
 					<p className={Styles.counter}>
-						{counter}/{query.l}
+						{counter.count}/{query.l}
 					</p>
 				</div>
 				{!loading ? (
 					start ? (
 						<div className={Styles.question}>
-							<h1>{query.m==="kbm"?quesDetails.question?.word:quesDetails.question.meaning}</h1>
+							<h1>
+								{query.m === 'kbm'
+									? quesDetails.question?.word
+									: quesDetails.question.meaning}
+							</h1>
 							<div className={Styles.options}>
 								<CreateOptions
 									answer={quesDetails.answer}
@@ -350,6 +391,7 @@ function Game() {
 									optArr={quesDetails.answerArr}
 									length={Number(query.l)}
 									counter={counter}
+									setCounter={setCounter}
 								/>
 							</div>
 						</div>
