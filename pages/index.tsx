@@ -21,6 +21,7 @@ import MeaningCard from '../components/cards/MeaningCard';
 import { StatesContext } from './_app';
 import { getUserLists } from '../typings/services/lists/getUserLists.service';
 import { updateList } from '../typings/services/lists/updateList.service';
+import { vibrate } from '../utils/vibrate.helper';
 
 const Home: NextPage = () => {
 	const { states, setStates } = useContext(StatesContext);
@@ -36,6 +37,7 @@ const Home: NextPage = () => {
 	});
 
 	const handleChange = (event: SelectChangeEvent) => {
+		vibrate();
 		setLevel(event.target.value as string);
 	};
 
@@ -153,6 +155,7 @@ const Home: NextPage = () => {
 														<MenuItem
 															key={index}
 															onClick={() => {
+																vibrate();
 																addToList({
 																	listName:
 																		ele,
@@ -171,6 +174,7 @@ const Home: NextPage = () => {
 							)}
 							<Button
 								onClick={() => {
+									vibrate();
 									if (!showKanjiCard) {
 										setShowKanjiCard(true);
 									}

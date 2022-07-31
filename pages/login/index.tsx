@@ -6,6 +6,7 @@ import Styles from '../../styles/login/login.module.scss';
 import { loginUser } from '../../typings/services/user/loginUser.service';
 import { StatesContext } from '../_app';
 import Router from 'next/router';
+import { vibrate } from '../../utils/vibrate.helper';
 const cookieCutter = require('cookie-cutter');
 
 function Login() {
@@ -17,11 +18,12 @@ function Login() {
 	});
 
 	async function loginFunc() {
+		vibrate();
 		setLoading(true);
 		try {
 			const response = await loginUser(loginDetails);
 			alert('Welcome!');
-			cookieCutter.set('t', response.data.t);
+			cookieCutter.set('t', response.data.t, {expires: new Date(Date.now() + 8640000)});
 			setStates((prev) => ({
 				...prev,
 				uid: response.data.data?._id,

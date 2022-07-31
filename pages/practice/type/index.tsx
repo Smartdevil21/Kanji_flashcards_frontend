@@ -6,6 +6,7 @@ import Parent from '../../../components/parent/Parent';
 import Styles from '../../../styles/practice/Type.module.scss';
 import { StatesContext } from '../../_app';
 import { useRouter } from 'next/router';
+import { vibrate } from '../../../utils/vibrate.helper';
 
 function CheckboxComp({
 	selected,
@@ -23,6 +24,7 @@ function CheckboxComp({
 			<FormControl>
 				<FormControlLabel
 					value="top"
+					onClick={vibrate}
 					control={
 						<Checkbox
 							sx={{ '&.Mui-checked': { color: '#FF7D39' } }}
@@ -113,7 +115,7 @@ function TypeOfPractice() {
 						href={`/practice/type/start?m=${selected}&l=${length}`}
 						passHref={true}
 					>
-						<Button>Start</Button>
+						<Button onClick={vibrate}>Start</Button>
 					</Link>
 				</div>
 			</div>

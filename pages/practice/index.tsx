@@ -9,6 +9,7 @@ import { Button, CircularProgress } from '@mui/material';
 import Link from 'next/link';
 import { getUserLists } from '../../typings/services/lists/getUserLists.service';
 import { useRouter } from 'next/router';
+import { vibrate } from '../../utils/vibrate.helper';
 
 function Practice() {
 	const router = useRouter();
@@ -21,6 +22,7 @@ function Practice() {
 		event: React.MouseEvent<HTMLElement>,
 		newMode: string
 	) => {
+		vibrate();
 		setMode(newMode);
 	};
 
@@ -142,12 +144,19 @@ function Practice() {
 							))}
 						</div>
 					</div>
-					<div className={Styles.nxt}>
-						<Button disabled={states.practiceOpt.length === 0}>
-							<Link href={'/practice/type'} passHref>
-								Next
-							</Link>
-						</Button>
+					<div
+						className={Styles.nxt}
+						style={{
+							pointerEvents:
+								states.practiceOpt.length === 0
+									? 'none'
+									: 'all',
+							opacity: states.practiceOpt.length === 0 ? 0.5 : 1,
+						}}
+					>
+						<Link href={'/practice/type'} passHref>
+							<Button onClick={vibrate}>Next</Button>
+						</Link>
 					</div>
 				</div>
 			) : (

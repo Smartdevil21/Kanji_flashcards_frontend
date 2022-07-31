@@ -6,12 +6,14 @@ import { Button, Stack } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { StatesContext } from '../../pages/_app';
 import Router from 'next/router';
+import { vibrate } from '../../utils/vibrate.helper';
 const cookieCutter = require('cookie-cutter');
 
 const Sidebar: NextPage = () => {
 	const { states, setStates } = useContext(StatesContext);
 	const pagename = Router.pathname.split('/')[1];
 	function closeHam() {
+		vibrate();
 		if (window.innerWidth > 750) return;
 		setStates((prev) => ({ ...prev, openHam: false }));
 	}

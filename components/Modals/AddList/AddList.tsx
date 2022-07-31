@@ -4,6 +4,7 @@ import { Button, CircularProgress, IconButton, TextField } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { createList } from '../../../typings/services/lists/createList.service';
 import { StatesContext } from '../../../pages/_app';
+import { vibrate } from '../../../utils/vibrate.helper';
 
 interface Props {
 	setopenAddListModal: Dispatch<SetStateAction<boolean>>;
@@ -15,6 +16,7 @@ function AddList({ setopenAddListModal }: Props) {
 	const [listName, setListName] = useState('');
 
 	const createListTrigger = async () => {
+		vibrate();
 		setLoading(true);
 		try {
 			const response = await createList({

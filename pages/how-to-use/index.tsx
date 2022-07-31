@@ -16,7 +16,7 @@ function index() {
 					<p>
 						We’ve made this project for people like us for whom
 						kanjis are an absolute nightmare. Since flashcards have
-						proven to be significantly useful, We thought why not to
+						proven to be significantly useful, we thought why not to
 						make a dedicated free website for it… So here you have
 						it.
 					</p>
@@ -24,27 +24,27 @@ function index() {
 						Anyways, regarding the guide, you can start right off
 						just by visiting the homepage where you’ll see a card
 						with a kanji in it, that’s the flashcard. You’ll see a
-						kanji on the front side of the card and make a guess
-						about meaning/reading of it. Once you think you’ve got
+						kanji on the front side of the card. Make a guess
+						about meaning/reading of it and then once you think you’ve got
 						it right, click on it and it will reveal the meaning,
 						kun & on reading of kanji with some examples.
 					</p>
 					<p>
 						To get another kanji, simply click on the “NEXT” button
 						which will be below the flashcard and it will give you
-						another random kanji.
+						another random kanji of same level that you{"'"}ve selected.
 					</p>
 					<p>
 						If you want to change the kanji level you can do so by
 						changing it from the select menu above the flashcard.
 					</p>
 					<p>
-						Pretty fascinationg, right? But the best part is yet to
+						Pretty fascinating, right? But the best part is yet to
 						come...
 					</p>
 					<strong>
 						<h2>
-							Get the most out of this project by making your
+							Get the most out of this project by making and verifying your
 							account!
 						</h2>
 					</strong>
@@ -52,7 +52,7 @@ function index() {
 					<p>
 						First, go to the SignUp page by clicking the
 						corresponding button from the navigation bar at the top
-						(Click the menu button if you’re on smartphones).
+						(Click the menu button if you’re on smartphone).
 					</p>
 					<p>
 						Make an account by providing necessary details. Once
@@ -61,18 +61,16 @@ function index() {
 						back to this website and refresh.
 					</p>
 					<p>
-						If you’ve done above steps correctly, you’ll see two new
-						options in the menu: “My Lists” and “Practice”. And on
-						the homepage, another select menu will appear next to
-						“Next” button.
+						If you’ve done the above steps correctly, you’ll see another select menu will appear next to
+						“Next” button on the homepage.
 					</p>
 					<p>
 						Now, if you want to bookmark a kanji for later
-						evaluation, you can do so by selecting “Bookmarks” from
+						evaluation or revision, you can do so by selecting “Bookmarks” from
 						that select menu.
 					</p>
 					<p>
-						The two options appeared on the Menu are what make the
+						Now, for the best part, you{"'"}ll see two more options appeared on the menu: {'"'}My lists{'"'} and {'"'}Practice{'"'}. These two options appeared on the Menu are what make the
 						core of this project.
 					</p>
 					<ol>
@@ -88,8 +86,8 @@ function index() {
 							<p>
 								It’s recommended to have just 5-6 list at a
 								time. Delete the lists that you don’t use
-								anymore. You can update the items in the list as
-								well as you can delete the list.
+								anymore. You can delte the items in the list as
+								well as the list itself.
 							</p>
 						</li>
 						<li>
@@ -133,7 +131,7 @@ function index() {
 					</p>
 					<p>
 						Any comment, feedback, opinion, criticism, suggestion is welcomed!
-						So feel free to share it with us through our contact
+						So feel free to share it with us through the contact
 						form.
 					</p>
 					<p>

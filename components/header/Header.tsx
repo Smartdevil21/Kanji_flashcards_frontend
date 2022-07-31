@@ -5,13 +5,14 @@ import Styles from './Header.module.scss';
 import { StatesContext } from '../../pages/_app';
 import { Button } from '@mui/material';
 import Link from 'next/link';
+import { vibrate } from '../../utils/vibrate.helper';
 
 const Header: NextPage = () => {
 	const { states, setStates } = useContext(StatesContext);
 
 	return (
 		<header className={Styles.header}>
-			<Link href={'/'} passHref><h1>Kanji Flashcards</h1></Link>
+			<Link href={'/'} passHref onClick={vibrate}><h1>Kanji Flashcards</h1></Link>
 			<Stack
 				direction={'row'}
 				alignItems={'center'}
@@ -21,7 +22,7 @@ const Header: NextPage = () => {
 				{/* <div className={Styles.theme_toggler}></div> */}
 
 				{states.userLoggedIn && states.windowWidth > 750 &&states.username? (
-					<IconButton>{states.username[0]}</IconButton>
+					<IconButton onClick={vibrate}>{states.username[0]}</IconButton>
 				) : (
 					<div className={Styles.log_btns}>
 						<Stack spacing={2} direction={'row'}>

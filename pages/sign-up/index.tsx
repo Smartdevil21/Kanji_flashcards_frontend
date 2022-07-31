@@ -6,6 +6,7 @@ import Styles from '../../styles/login/login.module.scss';
 import { createUser } from '../../typings/services/user/createUser.service';
 import { StatesContext } from '../_app';
 import Router from 'next/router';
+import { vibrate } from '../../utils/vibrate.helper';
 
 const cookieCutter = require('cookie-cutter');
 
@@ -20,7 +21,8 @@ function Signup() {
 		confirmPassword: '',
 	});
 
-	async function signUp() {
+	async function signUpTrigger() {
+		vibrate();
 		setLoading(true);
 		try {
 			const { username, email, password } = userDetails;
@@ -30,7 +32,7 @@ function Signup() {
 					email,
 					password,
 				});
-				cookieCutter.set('t', response.data.t);
+				cookieCutter.set('t', response.data.t, {expires: new Date(Date.now() + 8640000)});
 				setStates((prev) => ({
 					...prev,
 					userLoggedIn: true,
@@ -115,7 +117,7 @@ function Signup() {
 						{errmsg}
 					</strong>
 					<div className={Styles.login_btn}>
-						<Button onClick={signUp}>
+						<Button onClick={signUpTrigger}>
 							{loading ? (
 								<CircularProgress
 									style={{

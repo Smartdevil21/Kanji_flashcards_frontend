@@ -5,6 +5,7 @@ import Parent from '../../components/parent/Parent';
 import Styles from '../../styles/contact/contact.module.scss';
 import { StatesContext } from '../_app';
 import { feedback } from '../../typings/services/feedback/feedback.service';
+import { vibrate } from '../../utils/vibrate.helper';
 
 const Contact: NextPage = () => {
 	const { states } = useContext(StatesContext);
@@ -16,6 +17,7 @@ const Contact: NextPage = () => {
 	});
 
 	const feedBackTrigger = async () => {
+		vibrate();
 		setLoading(true);
 		try {
 			if (

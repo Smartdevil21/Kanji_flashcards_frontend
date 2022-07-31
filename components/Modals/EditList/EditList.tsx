@@ -5,6 +5,7 @@ import { Icon } from '@iconify/react';
 import { ListData } from '../../../typings/interfaces/lists/getUserLists.interface';
 import { updateList } from '../../../typings/services/lists/updateList.service';
 import { StatesContext } from '../../../pages/_app';
+import { vibrate } from '../../../utils/vibrate.helper';
 
 interface Props {
 	setOpenEditModal: Dispatch<SetStateAction<boolean>>;
@@ -59,6 +60,7 @@ function ListItem({
 			) : (
 				<IconButton
 					onClick={() => {
+						vibrate();
 						deleteListItem({ ln, uid: states.uid as string });
 					}}
 				>
@@ -80,6 +82,7 @@ function EditList({
 					<h1>{listToBeEdited?.listName}</h1>
 					<IconButton
 						onClick={() => {
+							vibrate();
 							setOpenEditModal((prev) => !prev);
 						}}
 					>

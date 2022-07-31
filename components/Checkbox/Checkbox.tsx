@@ -8,6 +8,7 @@ import React, { Dispatch, SetStateAction, useState, useContext } from 'react';
 import Styles from './Checkbox.module.scss';
 import { IStates } from '../../pages/_app';
 import { StatesContext } from '../../pages/_app';
+import { vibrate } from '../../utils/vibrate.helper';
 
 function CheckboxElement({
 	opt,
@@ -29,6 +30,7 @@ function CheckboxElement({
 			<FormControl>
 				<FormControlLabel
 					value="top"
+					onClick={vibrate}
 					control={
 						<Checkbox
 							size={states.windowWidth > 750 ? 'small' : 'medium'}

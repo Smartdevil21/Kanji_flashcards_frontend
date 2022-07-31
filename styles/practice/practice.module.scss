@@ -29,27 +29,22 @@
 		position: absolute;
 		bottom: 20px;
 		right: 20px;
-		button {
+		a {
 			text-transform: none;
 			background-color: var(--orange);
-			a {
-				color: #f9f9f9;
-				text-decoration: none;
-			}
-			&:disabled{
-				opacity: 0.5;
-			}
+			color: #f9f9f9;
+			text-decoration: none;
 		}
 	}
 }
 
-@media only screen and (max-width:750px){
-	.practice{
+@media only screen and (max-width: 750px) {
+	.practice {
 		min-height: calc(100vh - 70px);
 		height: fit-content;
 		overflow-y: none;
 		padding-top: 40px;
-		.nxt{
+		.nxt {
 			position: fixed;
 		}
 	}

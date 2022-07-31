@@ -25,6 +25,7 @@ import { getUserLists } from '../../../../typings/services/lists/getUserLists.se
 import { getKanjisByFilter } from '../../../../typings/services/kanjis/getKanjisByFilter.service';
 import { KanjiEntry } from '../../../../typings/interfaces/kanjis/kanjiList.interface';
 import { getEveryKanji } from '../../../../typings/services/kanjis/getEveryKanji.service';
+import { vibrate } from '../../../../utils/vibrate.helper';
 
 interface QuestionDetails {
 	questionsKanjis: KanjiEntry[];
@@ -69,6 +70,7 @@ function CreateOptions({
 					<FormControlLabel
 						onClick={() => {
 							setSelectedAns(opt);
+							vibrate();
 							if (answer === opt) {
 								setTimeout(() => {
 									if (counter.count < length) {
@@ -333,9 +335,9 @@ function Game() {
 		<Parent>
 			<div className={Styles.game}>
 				<h2>
-					{router.query.m === 'kbfr'
-						? 'Guess the Kanji based on Furigana Reading.'
-						: 'Guess the Furigana reading based on Kanji.'}
+					{router.query.m === 'kbm'
+						? 'Guess the Kanji by its meaning.'
+						: 'Guess the meaning of the Kanji.'}
 				</h2>
 				{/* <Button onClick={changeQuestion}>change</Button> */}
 				<div className={Styles.score}>
@@ -397,6 +399,7 @@ function Game() {
 					) : (
 						<Button
 							onClick={() => {
+								vibrate();
 								setLoading(true);
 								changeQuestion();
 								setTimeout(() => {

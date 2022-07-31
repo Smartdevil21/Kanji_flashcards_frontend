@@ -25,6 +25,7 @@ import { getUserLists } from '../../../typings/services/lists/getUserLists.servi
 import { ListData } from '../../../typings/interfaces/lists/getUserLists.interface';
 import { updateList } from '../../../typings/services/lists/updateList.service';
 import { useRouter } from 'next/router';
+import { vibrate } from '../../../utils/vibrate.helper';
 
 function List({
 	list,
@@ -43,6 +44,7 @@ function List({
 }) {
 	const [loading, setLoading] = useState(false);
 	async function deleteList() {
+		vibrate();
 		setLoading(true);
 		try {
 			const confirmation = confirm('You sure you want to delete?');
@@ -65,7 +67,10 @@ function List({
 	return (
 		<div className={Styles.lists}>
 			<div className={Styles.list_curtain}></div>
-			<h3>{list.listName}</h3>
+			<Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+				<h3>{list.listName}</h3>
+				<p className={Styles.items_count}>Items:{" "}{list.listItems.length}</p>
+			</Stack>
 			<p>{list.listItems.map((ele: string) => `${ele} ,`)}</p>
 			<Stack
 				direction={'row'}
@@ -75,6 +80,7 @@ function List({
 			>
 				<IconButton
 					onClick={() => {
+						vibrate();
 						setOpenEditModal((prev) => !prev);
 						setListToBeEdited(list);
 					}}
@@ -174,6 +180,7 @@ function UserLists() {
 				<div className={Styles.add_list_btn}>
 					<IconButton
 						onClick={() => {
+							vibrate();
 							setopenAddListModal(true);
 						}}
 					>

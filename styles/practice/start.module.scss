@@ -10,6 +10,9 @@
 	font-family: var(--content_font);
 	position: relative;
 	overflow-y: scroll;
+	&::-webkit-scrollbar{
+		display: none;
+	}
 	h2 {
 		margin-bottom: 10px;
 		text-align: center;
