@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { KanjiEntry } from '../../typings/interfaces/kanjis/kanjiList.interface';
 import Styles from '../../styles/Home.module.scss';
 import { CardProps } from '../../pages';
-import { vibrate } from '../../utils/vibrate.helper';
+// import { vibrate } from '../../utils/vibrate.helper';
 
 const MeaningCard = ({ setShowKanjiCard, currentWord }: CardProps) => {
 	return (
@@ -10,7 +10,7 @@ const MeaningCard = ({ setShowKanjiCard, currentWord }: CardProps) => {
 			<div
 				className={Styles.meaning_card}
 				onClick={() => {
-					vibrate();
+					// vibrate();
 					setShowKanjiCard((prev) => !prev);
 				}}
 			>

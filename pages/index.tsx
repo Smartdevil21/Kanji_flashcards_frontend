@@ -38,6 +38,7 @@ const Home: NextPage = () => {
 
 	const handleChange = (event: SelectChangeEvent) => {
 		vibrate();
+		setCounter((prev) => ({ ...prev, pointer: 0 }));
 		setLevel(event.target.value as string);
 	};
 
@@ -76,7 +77,7 @@ const Home: NextPage = () => {
 			console.log(response);
 		} catch (error) {
 			console.log(error);
-		};
+		}
 		setBookmarking(false);
 	}
 

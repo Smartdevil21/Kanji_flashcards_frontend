@@ -82,7 +82,7 @@ function EditList({
 					<h1>{listToBeEdited?.listName}</h1>
 					<IconButton
 						onClick={() => {
-							vibrate();
+							// vibrate();
 							setOpenEditModal((prev) => !prev);
 						}}
 					>

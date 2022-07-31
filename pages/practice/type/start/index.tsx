@@ -70,8 +70,8 @@ function CreateOptions({
 					<FormControlLabel
 						onClick={() => {
 							setSelectedAns(opt);
-							vibrate();
 							if (answer === opt) {
+								vibrate();
 								setTimeout(() => {
 									if (counter.count < length) {
 										setCounter((prev) => ({

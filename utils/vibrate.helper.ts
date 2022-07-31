@@ -1,3 +1,3 @@
 export function vibrate(){
-    navigator.vibrate(50);
+    navigator.vibrate(25);
 };
