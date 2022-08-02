@@ -103,7 +103,7 @@ function Practice() {
 								setState={setStates}
 								mode={mode}
 							/>
-							<CheckboxElement
+							{/* <CheckboxElement
 								opt={'Kanji[N3]'}
 								ans={''}
 								selected={states?.practiceOpt}
@@ -123,7 +123,7 @@ function Practice() {
 								selected={states?.practiceOpt}
 								setState={setStates}
 								mode={mode}
-							/>
+							/> */}
 						</div>
 					</div>
 					<br />

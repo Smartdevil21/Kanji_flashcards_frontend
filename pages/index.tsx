@@ -111,9 +111,9 @@ const Home: NextPage = () => {
 								>
 									<MenuItem value={'5'}>N5</MenuItem>
 									<MenuItem value={'4'}>N4</MenuItem>
-									<MenuItem value={'3'}>N3</MenuItem>
+									{/* <MenuItem value={'3'}>N3</MenuItem>
 									<MenuItem value={'2'}>N2</MenuItem>
-									<MenuItem value={'1'}>N1</MenuItem>
+									<MenuItem value={'1'}>N1</MenuItem> */}
 								</Select>
 							</FormControl>
 						</Box>
