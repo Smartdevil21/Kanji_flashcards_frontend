@@ -12,7 +12,9 @@ const Header: NextPage = () => {
 
 	return (
 		<header className={Styles.header}>
-			<Link href={'/'} passHref onClick={vibrate}><h1>Kanji Flashcards</h1></Link>
+			<Link href={'/'} passHref>
+				<h1 onClick={vibrate}>Kanji Flashcards</h1>
+			</Link>
 			<Stack
 				direction={'row'}
 				alignItems={'center'}
@@ -21,13 +23,23 @@ const Header: NextPage = () => {
 			>
 				{/* <div className={Styles.theme_toggler}></div> */}
 
-				{states.userLoggedIn && states.windowWidth > 750 &&states.username? (
-					<IconButton onClick={vibrate}>{states.username[0]}</IconButton>
+				{states.userLoggedIn &&
+				states.windowWidth > 750 &&
+				states.username ? (
+					<IconButton onClick={vibrate}>
+						{states.username[0]}
+					</IconButton>
 				) : (
 					<div className={Styles.log_btns}>
 						<Stack spacing={2} direction={'row'}>
-							<Link href={'/login'} passHref ><Button className={Styles.login_btn}>Log in</Button></Link>
-							<Link href={'/sign-up'} passHref><Button>Sign Up</Button></Link>
+							<Link href={'/login'} passHref>
+								<Button className={Styles.login_btn}>
+									Log in
+								</Button>
+							</Link>
+							<Link href={'/sign-up'} passHref>
+								<Button>Sign Up</Button>
+							</Link>
 						</Stack>
 					</div>
 				)}

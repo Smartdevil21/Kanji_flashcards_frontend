@@ -22,12 +22,14 @@ import { StatesContext } from './_app';
 import { getUserLists } from '../typings/services/lists/getUserLists.service';
 import { updateList } from '../typings/services/lists/updateList.service';
 import { vibrate } from '../utils/vibrate.helper';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 
 const Home: NextPage = () => {
 	const { states, setStates } = useContext(StatesContext);
 	const [showKanjiCard, setShowKanjiCard] = useState(true);
 	const [level, setLevel] = useState('5');
-	const [selectList, setSelectList] = useState('Bookmarks');
+	const [alert, setAlert] = useState(!states.email_verified);
 	const [wordList, setWordList] = useState<KanjiEntry[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [bookmarking, setBookmarking] = useState(false);
@@ -35,6 +37,7 @@ const Home: NextPage = () => {
 		pointer: 0,
 		history: [0],
 	});
+	const [bySeq, setBySeq] = useState(true);
 
 	const handleChange = (event: SelectChangeEvent) => {
 		vibrate();
@@ -43,7 +46,7 @@ const Home: NextPage = () => {
 	};
 
 	//async function for data collection of user from database
-	async function getPreLoadDetails() {
+	async function getPreLoadDetails(): Promise<void> {
 		setLoading(true);
 		try {
 			const response1 = await getAllKanjisByLevel({ level });
@@ -63,9 +66,9 @@ const Home: NextPage = () => {
 			console.log(error);
 		}
 		setLoading(false);
-	}
+	};
 
-	async function addToList({ listName }: { listName: string }) {
+	async function addToList({ listName }: { listName: string }): Promise<void> {
 		setBookmarking(true);
 		try {
 			const response = await updateList({
@@ -79,6 +82,11 @@ const Home: NextPage = () => {
 			console.log(error);
 		}
 		setBookmarking(false);
+	};
+
+	function swipper(e:HTMLElementEventMap){
+		if(!bySeq)return;
+		console.log(e);
 	}
 
 	useEffect(() => {
@@ -93,6 +101,22 @@ const Home: NextPage = () => {
 					<CircularProgress style={{ color: 'var(--orange)' }} />
 				) : (
 					<>
+						{states.userLoggedIn && (
+							<>
+								<Collapse in={alert}>
+									<Alert
+										severity="success"
+										onClose={() => {
+											setAlert(false);
+										}}
+									>
+										Verification Email has been sent successfully!
+									</Alert>
+								</Collapse>
+								<br/>
+							</>
+						)}
+
 						<Box
 							sx={{ minWidth: 120 }}
 							style={{ marginBottom: '10px' }}
@@ -164,7 +188,7 @@ const Home: NextPage = () => {
 															}}
 															value={ele}
 														>
-															{ele}
+															<span>{ele}</span>
 														</MenuItem>
 													)
 												)}

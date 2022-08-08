@@ -1,0 +1,31 @@
+.info_card {
+    height: 100%;
+    width: 100%;
+    // background: #e5e5e5;
+    border-radius: 10px;
+    // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 20px;
+    h1 {
+        font-family: var(--japanese_font);
+        color: var(--black);
+        font-size: 64px;
+    }
+    h3,
+    p {
+        // margin: 10px auto;
+        font-family: var(--content_font);
+        text-align: center;
+    }
+    h3 {
+        margin: 10px auto;
+        font-size: 32px;
+    }
+    p{
+        font-size: 24px;
+    }
+}
