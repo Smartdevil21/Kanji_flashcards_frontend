@@ -8,7 +8,7 @@ import { StatesContext } from '../../../pages/_app';
 import { vibrate } from '../../../utils/vibrate.helper';
 import { KanjiEntry } from '../../../typings/interfaces/kanjis/kanjiList.interface';
 import { searchKanjiByWord } from '../../../typings/services/kanjis/searchKanjiByWord.service';
-import InfoCard from '../../cards/infoCard/infocard';
+import Infocard from "../../cards/infoCard/Infocard";
 
 interface ListItemProps {
 	item: string;
@@ -141,7 +141,7 @@ function EditList({ setOpenEditModal, listToBeEdited }: Props) {
 				</Stack>
 				<div className={Styles.list_item_wrapper}>
 					{showMeaning ? (
-						<InfoCard kanjiWord={currentKanjiSelected} />
+						<Infocard kanjiWord={currentKanjiSelected} />
 					) : (
 						<Stack
 							direction={'column'}
