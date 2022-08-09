@@ -8,12 +8,14 @@ import {
 	SetStateAction,
 	useEffect,
 	useContext,
+	ChangeEvent,
 } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Switch from '@mui/material/Switch';
 import { getAllKanjisByLevel } from '../typings/services/kanjis/getAllKanjisByLevels.service';
 import { KanjiEntry } from '../typings/interfaces/kanjis/kanjiList.interface';
 import KanjiCard from '../components/cards/KanjiCard';
@@ -31,6 +33,7 @@ const Home: NextPage = () => {
 	const [level, setLevel] = useState('5');
 	const [alert, setAlert] = useState(!states.email_verified);
 	const [wordList, setWordList] = useState<KanjiEntry[]>([]);
+	const [showRandomKanjis, setShowRandomKanjis] = useState(true);
 	const [loading, setLoading] = useState(false);
 	const [bookmarking, setBookmarking] = useState(false);
 	const [counter, setCounter] = useState({
@@ -66,9 +69,13 @@ const Home: NextPage = () => {
 			console.log(error);
 		}
 		setLoading(false);
-	};
+	}
 
-	async function addToList({ listName }: { listName: string }): Promise<void> {
+	async function addToList({
+		listName,
+	}: {
+		listName: string;
+	}): Promise<void> {
 		setBookmarking(true);
 		try {
 			const response = await updateList({
@@ -82,11 +89,6 @@ const Home: NextPage = () => {
 			console.log(error);
 		}
 		setBookmarking(false);
-	};
-
-	function swipper(e:HTMLElementEventMap){
-		if(!bySeq)return;
-		console.log(e);
 	}
 
 	useEffect(() => {
@@ -110,13 +112,36 @@ const Home: NextPage = () => {
 											setAlert(false);
 										}}
 									>
-										Verification Email has been sent successfully!
+										Verification Email has been sent
+										successfully!
 									</Alert>
 								</Collapse>
-								<br/>
+								<br />
 							</>
 						)}
-
+						<div className={Styles.seqSwitcher}>
+							<Stack
+								direction={'row'}
+								alignItems={'center'}
+								spacing={0}
+							>
+								<label htmlFor="">Show Random Kanjis:</label>
+								<Switch
+									color="warning"
+									checked={showRandomKanjis}
+									onChange={(
+										e: React.ChangeEvent<HTMLInputElement>
+									) => {
+										setCounter((prev) => ({
+											...prev,
+											pointer: 0,
+										}));
+										setShowRandomKanjis(e.target.checked);
+									}}
+									inputProps={{ 'aria-label': 'controlled' }}
+								/>
+							</Stack>
+						</div>
 						<Box
 							sx={{ minWidth: 120 }}
 							style={{ marginBottom: '10px' }}
@@ -153,6 +178,28 @@ const Home: NextPage = () => {
 							/>
 						)}
 						<div className={Styles.card_btns}>
+							{!showRandomKanjis && (
+								<Button
+									disabled={counter.pointer <= 0}
+									style={{
+										opacity:
+											counter.pointer <= 0 ? '0.5' : '1',
+									}}
+									onClick={() => {
+										if (counter.pointer === 0) return;
+										vibrate();
+										if (!showKanjiCard) {
+											setShowKanjiCard(true);
+										}
+										setCounter((prev) => ({
+											...prev,
+											pointer: prev.pointer - 1,
+										}));
+									}}
+								>
+									Prev
+								</Button>
+							)}
 							{states.email_verified && states.userLoggedIn && (
 								<>
 									{bookmarking ? (
@@ -205,9 +252,12 @@ const Home: NextPage = () => {
 									}
 									setCounter((prev) => ({
 										...prev,
-										pointer: Math.floor(
-											Math.random() * wordList.length
-										),
+										pointer: showRandomKanjis
+											? Math.floor(
+													Math.random() *
+														wordList.length
+											  )
+											: prev.pointer + 1,
 									}));
 								}}
 							>

@@ -4,6 +4,8 @@
 	align-items: center;
 	flex-direction: column;
 	width: 100%;
+	position: relative;
+	height: 100%;
 	label {
 		font-family: var(--content_font);
 		font-size: small;
@@ -12,6 +14,11 @@
 	select {
 		background-color: #f2f2f2;
 		margin-bottom: 10px;
+	}
+	.seqSwitcher{
+		position: absolute;
+		top: 2vh;
+		right: 2vw;
 	}
 	.kanji_card,
 	.meaning_card {
@@ -56,7 +63,8 @@
 			color: var(--black);
 			border: 1.5px solid var(--black);
 			margin: 10px;
-
+			width: fit-content;
+			padding: auto 20px;
 			p {
 				white-space: nowrap;
 			}
