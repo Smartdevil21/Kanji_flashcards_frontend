@@ -7,9 +7,6 @@
     overflow-y: scroll;
     width: 100%;
     height: 90vh;
-    &::-webkit-scrollbar{
-        display: none;
-    }
     h1{
         font-family: var(--content_font);
     }

@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Styles from '../styles/Home.module.scss';
 import Parent from '../components/parent/Parent';
-import { Button, CircularProgress, Stack } from '@mui/material';
+import { Button, CircularProgress, Stack, TextField } from '@mui/material';
 import {
 	useState,
 	Dispatch,
@@ -58,12 +58,11 @@ const Home: NextPage = () => {
 				const response2 = await getUserLists({
 					uid: states.uid as string,
 				});
-				const listNames: string[] = [];
-				response2.data.data.map((ele, index) => {
-					listNames.push(ele.listName);
-				});
-				// console.log(response2.data.data);
-				setStates((prev) => ({ ...prev, listNames }));
+				// const listNames: string[] = [];
+				// response2.data.data.map((ele, index) => {
+				// 	listNames.push(ele.listName);
+				// });
+				setStates((prev) => ({ ...prev, lists: response2.data.data }));
 			}
 		} catch (error) {
 			console.log(error);
@@ -84,12 +83,34 @@ const Home: NextPage = () => {
 				uid: states.uid,
 				listName,
 			});
+			const activeList = states.lists.filter(
+				(ele) => ele.listName === listName
+			)[0];
+			activeList.listItems.push(wordList[counter.pointer].word);
+			setStates((prev) => ({
+				...prev,
+				lists: prev.lists
+					.filter((ele) => ele.listName !== listName)
+					.concat([activeList]),
+			}));
 			console.log(response);
 		} catch (error) {
 			console.log(error);
 		}
 		setBookmarking(false);
 	}
+
+	const jumpToIndex = (e: ChangeEvent<HTMLInputElement>) => {
+		if (
+			Number(e.target.value) >= wordList.length ||
+			Number(e.target.value) < 0
+		)
+			return;
+		setCounter((prev) => ({
+			...prev,
+			pointer: Number(e.target.value),
+		}));
+	};
 
 	useEffect(() => {
 		getPreLoadDetails();
@@ -142,30 +163,53 @@ const Home: NextPage = () => {
 								/>
 							</Stack>
 						</div>
-						<Box
-							sx={{ minWidth: 120 }}
+						<Stack
+							direction={'row'}
+							spacing={1}
+							alignItems={'center'}
 							style={{ marginBottom: '10px' }}
 						>
-							<FormControl fullWidth>
-								<InputLabel id="demo-simple-select-label">
-									Level
-								</InputLabel>
-								<Select
-									labelId="demo-simple-select-label"
-									id="demo-simple-select"
-									value={level}
-									size={'small'}
-									label="Age"
-									onChange={handleChange}
-								>
-									<MenuItem value={'5'}>N5</MenuItem>
-									<MenuItem value={'4'}>N4</MenuItem>
-									{/* <MenuItem value={'3'}>N3</MenuItem>
+							<Box sx={{ minWidth: 120 }}>
+								<FormControl fullWidth>
+									<InputLabel id="demo-simple-select-label">
+										Level
+									</InputLabel>
+									<Select
+										labelId="demo-simple-select-label"
+										id="demo-simple-select"
+										value={level}
+										size={'small'}
+										label="Age"
+										onChange={handleChange}
+									>
+										<MenuItem value={'5'}>N5</MenuItem>
+										<MenuItem value={'4'}>N4</MenuItem>
+										{/* <MenuItem value={'3'}>N3</MenuItem>
 									<MenuItem value={'2'}>N2</MenuItem>
 									<MenuItem value={'1'}>N1</MenuItem> */}
-								</Select>
-							</FormControl>
-						</Box>
+									</Select>
+								</FormControl>
+							</Box>
+							{!showRandomKanjis && (
+								<Stack direction={'row'} alignItems={'end'}>
+									<FormControl fullWidth>
+										<TextField
+											style={{ width: 80 }}
+											type={'number'}
+											value={counter.pointer}
+											size={'small'}
+											label={'Jump to'}
+											onChange={jumpToIndex}
+										/>
+									</FormControl>
+
+									<strong style={{ marginLeft: 10 }}>
+										{' '}
+										/{wordList.length - 1}
+									</strong>
+								</Stack>
+							)}
+						</Stack>
 						{showKanjiCard ? (
 							<KanjiCard
 								setShowKanjiCard={setShowKanjiCard}
@@ -217,27 +261,51 @@ const Home: NextPage = () => {
 											<Select
 												labelId="demo-simple-select-label"
 												id="demo-simple-select"
-												value={'Bookmarks'}
+												value={'Choose List'}
 												size={'small'}
 												label="Add to"
 												// onChange={handleChange}
 											>
-												{states.listNames.map(
-													(ele, index) => (
-														<MenuItem
-															key={index}
-															onClick={() => {
-																vibrate();
-																addToList({
-																	listName:
-																		ele,
-																});
-															}}
-															value={ele}
-														>
-															<span>{ele}</span>
-														</MenuItem>
-													)
+												<MenuItem
+													value={"Choose List"}
+												>
+													<span>Choose List</span>
+												</MenuItem>
+												{states.lists.map(
+													(ele, index) => {
+														if (
+															!ele.listItems?.includes(
+																wordList[
+																	counter
+																		.pointer
+																]?.word
+															)
+														) {
+															return (
+																<MenuItem
+																	key={index}
+																	onClick={() => {
+																		vibrate();
+																		addToList(
+																			{
+																				listName:
+																					ele.listName,
+																			}
+																		);
+																	}}
+																	value={
+																		ele.listName
+																	}
+																>
+																	<span>
+																		{
+																			ele.listName
+																		}
+																	</span>
+																</MenuItem>
+															);
+														}
+													}
 												)}
 											</Select>
 										</FormControl>
@@ -245,6 +313,17 @@ const Home: NextPage = () => {
 								</>
 							)}
 							<Button
+								disabled={
+									!showRandomKanjis &&
+									counter.pointer == wordList.length - 1
+								}
+								style={{
+									opacity:
+										!showRandomKanjis &&
+										counter.pointer == wordList.length - 1
+											? '0.5'
+											: '1',
+								}}
 								onClick={() => {
 									vibrate();
 									if (!showKanjiCard) {

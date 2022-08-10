@@ -4,6 +4,9 @@
 	overflow-y: scroll;
 	// background-color: red;
 	display: flex;
+	&::-webkit-scrollbar{
+		display: none;
+	}
 	.main {
 		position: absolute;
 		left: 25%;
@@ -18,13 +21,14 @@
 		overflow-y: scroll;
 		flex-direction: column;
 		&::-webkit-scrollbar{
-			// display: none;
+			display: none;
 		}
 	}
 }
 
 @media only screen and (max-width: 750px) {
 	.container {
+		margin-right: -10px;
 		.main {
 			position: relative;
 			left: 0px;

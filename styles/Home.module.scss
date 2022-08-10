@@ -7,9 +7,13 @@
 	position: relative;
 	height: 100%;
 	label {
-		font-family: var(--content_font);
+		font-family: var(--parah_font);
 		font-size: small;
 		font-weight: bold;
+	}
+	strong{
+		font-family: var(--parah_font);
+		color: var(--grey)
 	}
 	select {
 		background-color: #f2f2f2;

@@ -12,6 +12,7 @@ import { getAllKanjisByLevel } from '../typings/services/kanjis/getAllKanjisByLe
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
 import { getUserLists } from '../typings/services/lists/getUserLists.service';
+import { ListData } from '../typings/interfaces/lists/getUserLists.interface';
 
 const cookieCutter = require('cookie-cutter');
 
@@ -22,7 +23,7 @@ export interface IStates {
 	windowWidth: number;
 	uid?: string;
 	email_verified: boolean;
-	listNames: string[];
+	lists: ListData[];
 	username?:string;
 	email?:string
 }
@@ -38,7 +39,7 @@ const StatesContext = createContext<{
 		openHam: false,
 		windowWidth: 0,
 		email_verified: false,
-		listNames: ['Bookmarks'],
+		lists: [{} as ListData],
 		uid: '',
 		username:'',
 		email:''
@@ -53,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		openHam: false,
 		windowWidth: 0,
 		email_verified: false,
-		listNames: ['Bookmarks']
+		lists: [{} as ListData]
 	});
 
 	const [loading, setLoading] = useState(true);
