@@ -31,7 +31,6 @@ const Contact: NextPage = () => {
 			const response = await feedback(contactMsg);
 			alert('Thanks! We appriciate your submission!');
 			setContactMsg((prev) => ({ ...prev, message: '' }));
-			console.log(response.data);
 		} catch (error) {
 			console.log(error);
 		}

@@ -14,6 +14,9 @@ const Parent = ({ children }: Props) => {
 			<Sidebar />
 			<Header />
 			<main className={Styles.main}>{children}</main>
+			{/* <div className={Styles.test}>
+
+			</div> */}
 		</div>
 	);
 };

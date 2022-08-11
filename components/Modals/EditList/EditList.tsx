@@ -8,12 +8,13 @@ import { StatesContext } from '../../../pages/_app';
 import { vibrate } from '../../../utils/vibrate.helper';
 import { KanjiEntry } from '../../../typings/interfaces/kanjis/kanjiList.interface';
 import { searchKanjiByWord } from '../../../typings/services/kanjis/searchKanjiByWord.service';
-import Infocard from "../../cards/infoCard/Infocard";
+import Infocard from '../../cards/infoCard/Infocard';
 
 interface ListItemProps {
 	item: string;
 	ln: string;
 	setShowMeaning: Dispatch<SetStateAction<boolean>>;
+	setListUpdated: Dispatch<SetStateAction<boolean>>;
 	setCurrentKanjiSelected: Dispatch<SetStateAction<KanjiEntry>>;
 }
 
@@ -21,6 +22,7 @@ function ListItem({
 	item,
 	ln,
 	setShowMeaning,
+	setListUpdated,
 	setCurrentKanjiSelected,
 }: ListItemProps) {
 	const { states } = useContext(StatesContext);
@@ -37,6 +39,7 @@ function ListItem({
 				word: item,
 			});
 			if (response.data.success) {
+				setListUpdated(true);
 				setDeleted(true);
 			}
 		} catch (error) {
@@ -74,7 +77,7 @@ function ListItem({
 						color: 'var(--orange)',
 						width: '40px',
 						height: '40px',
-						padding:'8px'
+						padding: '8px',
 					}}
 				/>
 			) : (
@@ -103,10 +106,11 @@ function ListItem({
 
 interface Props {
 	setOpenEditModal: Dispatch<SetStateAction<boolean>>;
+	setListUpdated: Dispatch<SetStateAction<boolean>>;
 	listToBeEdited?: ListData;
 }
 
-function EditList({ setOpenEditModal, listToBeEdited }: Props) {
+function EditList({ setOpenEditModal, listToBeEdited, setListUpdated }: Props) {
 	const [showMeaning, setShowMeaning] = useState(false);
 	const [currentKanjiSelected, setCurrentKanjiSelected] =
 		useState<KanjiEntry>({} as KanjiEntry);
@@ -158,6 +162,7 @@ function EditList({ setOpenEditModal, listToBeEdited }: Props) {
 										setCurrentKanjiSelected={
 											setCurrentKanjiSelected
 										}
+										setListUpdated={setListUpdated}
 									/>
 								)
 							)}

@@ -1,7 +1,7 @@
 .howToUse {
 	background-color: #f2f2f2;
 	width: 100%;
-	height: 90vh;
+	height: 100%;
 	padding: 30px;
 	font-family: var(--parah_font);
 	h1 {
@@ -31,10 +31,6 @@
 @media only screen and (max-width:750px){
 	.howToUse{
 		padding: 20px;
-		height: calc(100% - 70px);
-		// margin-top: 70px;
-		.guide_wrapper{
-			padding-bottom: 10vh;
-		}
+		height: 100%;
 	}
 }

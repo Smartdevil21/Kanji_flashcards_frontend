@@ -14,7 +14,7 @@ import { vibrate } from '../../utils/vibrate.helper';
 function Practice() {
 	const router = useRouter();
 	const { states, setStates } = useContext(StatesContext);
-	const [mode, setMode] = useState('multi-select');
+	const [mode, setMode] = useState('single-select');
 	const [userListNames, setUserListNames] = useState<string[]>([]);
 	const [loading, setLoading] = useState(false);
 
@@ -27,7 +27,6 @@ function Practice() {
 	};
 
 	const getUserListTrigger = async () => {
-		console.log(!!states.username);
 		if (!states.username) return router.push('/');
 		setLoading(true);
 		try {

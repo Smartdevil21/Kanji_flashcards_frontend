@@ -1,11 +1,17 @@
 .container {
 	width: 100%;
-	height: 100vh;
-	overflow-y: scroll;
+	min-height: 100vh;
 	// background-color: red;
 	display: flex;
+	height: fit-content;
 	&::-webkit-scrollbar{
 		display: none;
+	}
+	.test{
+		height: 200vh;
+		background: linear-gradient(#111, #fff);
+		// z-index: 200;
+		width: 100%;
 	}
 	.main {
 		position: absolute;
@@ -14,7 +20,8 @@
 		width: 75%;
 		z-index: 2;
 		background-color: #f2f2f2;
-		height: 90vh;
+		min-height: 90vh;
+		height: fit-content;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -34,7 +41,7 @@
 			left: 0px;
 			top: 70px;
 			width: 100%;
-			height: calc(100% - 70px);
+			min-height: calc(100% - 70px);
 			// overflow-y: scroll;
 		}
 	}

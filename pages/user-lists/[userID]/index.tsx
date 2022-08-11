@@ -67,9 +67,15 @@ function List({
 	return (
 		<div className={Styles.lists}>
 			<div className={Styles.list_curtain}></div>
-			<Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+			<Stack
+				direction={'row'}
+				justifyContent={'space-between'}
+				alignItems={'center'}
+			>
 				<h3>{list.listName}</h3>
-				<p className={Styles.items_count}>Items:{" "}{list.listItems.length}</p>
+				<p className={Styles.items_count}>
+					Items: {list.listItems.length}
+				</p>
 			</Stack>
 			<p>{list.listItems.map((ele: string) => `${ele} ,`)}</p>
 			<Stack
@@ -124,6 +130,7 @@ function UserLists() {
 		userID: '',
 	});
 	const [loading, setLoading] = useState(false);
+	const [listUpdated, setListUpdated] = useState(false);
 
 	const getUserListEntryDetails = async () => {
 		if (!states.username) return router.push('/');
@@ -138,10 +145,9 @@ function UserLists() {
 	};
 
 	useEffect(() => {
-		if (!openEditModal && !openAddListModal) {
-			getUserListEntryDetails();
-		}
-	}, [openEditModal, openAddListModal]);
+		getUserListEntryDetails();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [listUpdated]);
 
 	return (
 		<Parent>
@@ -193,7 +199,10 @@ function UserLists() {
 				</div>
 				<Modal open={openAddListModal}>
 					<>
-						<AddList setopenAddListModal={setopenAddListModal} />
+						<AddList
+							setopenAddListModal={setopenAddListModal}
+							setListUpdated={setListUpdated}
+						/>
 					</>
 				</Modal>
 				<Modal open={openEditModal}>
@@ -201,6 +210,7 @@ function UserLists() {
 						<EditList
 							setOpenEditModal={setOpenEditModal}
 							listToBeEdited={listToBeEdited}
+							setListUpdated={setListUpdated}
 						/>
 					</>
 				</Modal>

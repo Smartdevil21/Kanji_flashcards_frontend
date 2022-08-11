@@ -8,9 +8,10 @@ import { vibrate } from '../../../utils/vibrate.helper';
 
 interface Props {
 	setopenAddListModal: Dispatch<SetStateAction<boolean>>;
+	setListUpdated: Dispatch<SetStateAction<boolean>>;
 }
 
-function AddList({ setopenAddListModal }: Props) {
+function AddList({ setopenAddListModal, setListUpdated }: Props) {
 	const { states } = useContext(StatesContext);
 	const [loading, setLoading] = useState(false);
 	const [listName, setListName] = useState('');
@@ -23,6 +24,7 @@ function AddList({ setopenAddListModal }: Props) {
 				ln: listName,
 				uid: states.uid as string,
 			});
+			setListUpdated(true);
 			setopenAddListModal((prev) => !prev);
 		} catch (error) {
 			console.log(error);
@@ -48,6 +50,8 @@ function AddList({ setopenAddListModal }: Props) {
 					variant="outlined"
 					value={listName}
 					onChange={(e) => {
+						if (e.target.value.length > 15)
+							return alert('Name exceeding 15 charecters!');
 						setListName(e.target.value);
 					}}
 					size={'small'}

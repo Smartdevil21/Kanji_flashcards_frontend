@@ -224,8 +224,6 @@ function Game() {
 			Math.random() * quesDetails.questionsKanjis.length
 		);
 		const que = quesDetails.questionsKanjis[q];
-		// console.log(quesDetails.questionsKanjis);
-		// console.log(`Index of que choosed: ${q}`);
 		if (coveredQuestions.indexOf(que.word) !== -1) {
 			getRandomUncoveredQuestion();
 			return que;
@@ -288,8 +286,7 @@ function Game() {
 							Math.random() * kanjiMeaningsOrWordsArr.length
 						)
 					];
-			}
-			// //console.log(`Sentence ${kanjiMeaning} and choosed ${q} ie ${opt}`);
+			};
 			if (arr.indexOf(opt) !== -1) {
 				getArrItem();
 				return opt;
@@ -301,8 +298,6 @@ function Game() {
 		let arr: string[] = [];
 		for (let i = 0; i <= 7; i++) {
 			const possibleOpt = getArrItem();
-			// console.log(`Got ${possibleOpt} in return`);
-			// console.log('');
 			arr.push(possibleOpt);
 		}
 		let ans: string = '';
@@ -321,10 +316,6 @@ function Game() {
 			answer: ans,
 			answerArr: Array.from(new Set(arr)),
 		}));
-		// console.log({
-		// 	question,
-		// 	ansArr: arr,
-		// });
 	};
 
 	useEffect(() => {

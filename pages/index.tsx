@@ -93,7 +93,6 @@ const Home: NextPage = () => {
 					.filter((ele) => ele.listName !== listName)
 					.concat([activeList]),
 			}));
-			console.log(response);
 		} catch (error) {
 			console.log(error);
 		}
@@ -108,12 +107,13 @@ const Home: NextPage = () => {
 			return;
 		setCounter((prev) => ({
 			...prev,
-			pointer: Number(e.target.value),
+			pointer: Math.floor(Number(e.target.value)),
 		}));
 	};
 
 	useEffect(() => {
 		getPreLoadDetails();
+		return () => {};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [level]);
 
@@ -266,9 +266,7 @@ const Home: NextPage = () => {
 												label="Add to"
 												// onChange={handleChange}
 											>
-												<MenuItem
-													value={"Choose List"}
-												>
+												<MenuItem value={'Choose List'}>
 													<span>Choose List</span>
 												</MenuItem>
 												{states.lists.map(

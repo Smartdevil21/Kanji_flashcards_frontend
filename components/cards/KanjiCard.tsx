@@ -13,9 +13,6 @@ const KanjiCard = ({ setShowKanjiCard, currentWord }: CardProps) => {
 					// vibrate();
 					setShowKanjiCard((prev) => !prev);
 				}}
-				onDrag={(e)=>{
-					console.log(e);
-				}}
 			>
 				<h1>{currentWord?.word}</h1>
 			</div>

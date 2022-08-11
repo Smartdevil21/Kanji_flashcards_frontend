@@ -33,7 +33,6 @@ function Login() {
 				username: response.data.data?.username,
 			}));
 			Router.push('/');
-			// console.log(response);
 		} catch (error) {
 			alert('Username or Passsword is incorrect!');
 			console.log(error);
