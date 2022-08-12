@@ -6,6 +6,7 @@
 	width: 100%;
 	position: relative;
 	height: 100%;
+	min-height: calc(100vh - 70px);
 	label {
 		font-family: var(--parah_font);
 		font-size: small;
@@ -21,8 +22,8 @@
 	}
 	.seqSwitcher{
 		position: absolute;
-		top: 2vh;
-		right: 2vw;
+		top: 10px;
+		right: 10px;
 	}
 	.kanji_card,
 	.meaning_card {
