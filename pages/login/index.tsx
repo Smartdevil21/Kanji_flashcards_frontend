@@ -44,6 +44,10 @@ function Login() {
 		<Entrance>
 			<div className={Styles.login}>
 				<h3>Hey user, how have you been?</h3>
+				<form onSubmit={(e)=>{
+					e.preventDefault();
+					loginFunc();
+				}}>
 				<Stack spacing={2} direction={'column'}>
 					<TextField
 						autoFocus={true}
@@ -71,7 +75,7 @@ function Login() {
 						}}
 					/>
 					<div className={Styles.login_btn}>
-						<Button onClick={loginFunc}>
+						<Button type='submit'>
 							{loading ? (
 								<CircularProgress
 									style={{
@@ -93,6 +97,7 @@ function Login() {
 						</p>
 					</div>
 				</Stack>
+				</form>
 			</div>
 		</Entrance>
 	);

@@ -57,6 +57,10 @@ function Signup() {
 			<div className={Styles.login}>
 				{/* eslint-disable-next-line react/no-unescaped-entities */}
 				<h3>We're happy to have you onboard!</h3>
+				<form onSubmit={(e)=>{
+					e.preventDefault();
+					signUpTrigger();
+				}}>
 				<Stack spacing={2} direction={'column'}>
 					<TextField
 						autoFocus={true}
@@ -117,7 +121,7 @@ function Signup() {
 						{errmsg}
 					</strong>
 					<div className={Styles.login_btn}>
-						<Button onClick={signUpTrigger}>
+						<Button type='submit'>
 							{loading ? (
 								<CircularProgress
 									style={{
@@ -139,6 +143,7 @@ function Signup() {
 						</p>
 					</div>
 				</Stack>
+				</form>
 			</div>
 		</Entrance>
 	);
