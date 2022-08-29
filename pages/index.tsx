@@ -42,6 +42,8 @@ const Home: NextPage = () => {
 	});
 	const [bySeq, setBySeq] = useState(true);
 
+	console.log(`Env: ${process.env.NODE_ENV}`)
+
 	const handleChange = (event: SelectChangeEvent) => {
 		vibrate();
 		setCounter((prev) => ({ ...prev, pointer: 0 }));
@@ -68,7 +70,7 @@ const Home: NextPage = () => {
 			console.log(error);
 		}
 		setLoading(false);
-	}
+	};
 
 	async function addToList({
 		listName,
@@ -97,7 +99,7 @@ const Home: NextPage = () => {
 			console.log(error);
 		}
 		setBookmarking(false);
-	}
+	};
 
 	const jumpToIndex = (e: ChangeEvent<HTMLInputElement>) => {
 		if (
