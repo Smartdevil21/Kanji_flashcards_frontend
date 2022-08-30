@@ -32,7 +32,7 @@ function Signup() {
 					email,
 					password,
 				});
-				cookieCutter.set('t', response.data.t, {expires: new Date(Date.now() + 8640000)});
+				cookieCutter.set('t', response.data.t, {expires: new Date(Date.now() + 864000000)});
 				setStates((prev) => ({
 					...prev,
 					userLoggedIn: true,

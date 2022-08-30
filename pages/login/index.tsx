@@ -23,7 +23,7 @@ function Login() {
 		try {
 			const response = await loginUser(loginDetails);
 			alert('Welcome!');
-			cookieCutter.set('t', response.data.t, {expires: new Date(Date.now() + 8640000)});
+			cookieCutter.set('t', response.data.t, {expires: new Date(Date.now() + 864000000)});
 			setStates((prev) => ({
 				...prev,
 				uid: response.data.data?._id,

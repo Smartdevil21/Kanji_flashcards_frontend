@@ -9,8 +9,6 @@ import {
 	useEffect,
 	useContext,
 	ChangeEvent,
-	useMemo,
-	useCallback,
 } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -45,7 +43,7 @@ const Home: NextPage = () => {
 	});
 	const [bySeq, setBySeq] = useState(true);
 
-	console.log(`Env: ${process.env.NODE_ENV}`)
+	// console.log(`Env: ${process.env.NODE_ENV}`)
 
 	const handleChange = (event: SelectChangeEvent) => {
 		vibrate();
