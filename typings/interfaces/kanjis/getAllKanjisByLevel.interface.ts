@@ -7,5 +7,5 @@ export interface GetAllKanjisByLevelResponse{
 };
 
 export interface GetAllKanjisByLevelRequest{
-    level:string
+    cardListName:string
 }

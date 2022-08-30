@@ -9,6 +9,8 @@ import {
 	useEffect,
 	useContext,
 	ChangeEvent,
+	useMemo,
+	useCallback,
 } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -26,11 +28,12 @@ import { updateList } from '../typings/services/lists/updateList.service';
 import { vibrate } from '../utils/vibrate.helper';
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
+import { getKanjisByFilter } from '../typings/services/kanjis/getKanjisByFilter.service';
 
 const Home: NextPage = () => {
 	const { states, setStates } = useContext(StatesContext);
 	const [showKanjiCard, setShowKanjiCard] = useState(true);
-	const [level, setLevel] = useState('5');
+	const [cardListName, setCardListName] = useState('5');
 	const [alert, setAlert] = useState(!states.email_verified);
 	const [wordList, setWordList] = useState<KanjiEntry[]>([]);
 	const [showRandomKanjis, setShowRandomKanjis] = useState(true);
@@ -47,25 +50,41 @@ const Home: NextPage = () => {
 	const handleChange = (event: SelectChangeEvent) => {
 		vibrate();
 		setCounter((prev) => ({ ...prev, pointer: 0 }));
-		setLevel(event.target.value as string);
+		setCardListName(event.target.value as string);
 	};
 
 	//async function for data collection of user from database
 	async function getPreLoadDetails(): Promise<void> {
 		setLoading(true);
 		try {
-			const response1 = await getAllKanjisByLevel({ level });
-			setWordList(response1.data.data);
+			if(['1','2','3','4','5'].includes(cardListName)){
+				const response1 = await getAllKanjisByLevel({ cardListName });
+				setWordList(response1.data.data);
+			}else{
+				const response1 = await getKanjisByFilter({ items: states.lists.filter((ele)=>ele.listName===cardListName)[0].listItems});
+				setWordList(response1.data.data);
+				console.log(cardListName);
+			};
+			//Here to apply the /list/items request to get the kanjis of the list se;ected by the user.
+
+			// Apply useMemo here!!!
 			if (states.userLoggedIn && states.email_verified) {
 				const response2 = await getUserLists({
 					uid: states.uid as string,
 				});
-				// const listNames: string[] = [];
-				// response2.data.data.map((ele, index) => {
-				// 	listNames.push(ele.listName);
-				// });
 				setStates((prev) => ({ ...prev, lists: response2.data.data }));
-			}
+				// const response2 = useMemo(async ()=>{
+				// 	try {
+				// 		const result = await getUserLists({
+				// 			uid: states.uid as string,
+				// 		});
+				// 		setStates((prev) => ({ ...prev, lists: result.data.data }));
+				// 		return result;
+				// 	} catch (error) {
+				// 		console.log(`Can't get the userLists in memo hook in index.tsx. Err: ${error}}`);	
+				// 	}
+				// }, [states.lists]);
+			};
 		} catch (error) {
 			console.log(error);
 		}
@@ -117,7 +136,7 @@ const Home: NextPage = () => {
 		getPreLoadDetails();
 		return () => {};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [level]);
+	}, [cardListName]);
 
 	return (
 		<Parent>
@@ -179,13 +198,17 @@ const Home: NextPage = () => {
 									<Select
 										labelId="demo-simple-select-label"
 										id="demo-simple-select"
-										value={level}
+										value={cardListName}
 										size={'small'}
 										label="Age"
 										onChange={handleChange}
 									>
 										<MenuItem value={'5'}>N5</MenuItem>
 										<MenuItem value={'4'}>N4</MenuItem>
+										{states.lists.map((list, index)=>{
+											if(list.listItems?.length===0)return;
+											return <MenuItem key={index} value={list.listName}>{list.listName}</MenuItem>
+										})}
 										{/* <MenuItem value={'3'}>N3</MenuItem>
 									<MenuItem value={'2'}>N2</MenuItem>
 									<MenuItem value={'1'}>N1</MenuItem> */}
