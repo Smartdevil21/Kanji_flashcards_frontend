@@ -45,6 +45,7 @@ function AddList({ setopenAddListModal, setListUpdated }: Props) {
 			</div>
 
 			<div className={Styles.addListContainer}>
+				<form onSubmit={createListTrigger}>
 				<h3>Enter the name of the List:</h3>
 				<TextField
 					variant="outlined"
@@ -59,7 +60,7 @@ function AddList({ setopenAddListModal, setListUpdated }: Props) {
 				/>
 				<div className={Styles.submitBtn}>
 					<Button
-						onClick={createListTrigger}
+						type='submit'
 						style={{ pointerEvents: loading ? 'none' : 'all' }}
 					>
 						{loading ? (
@@ -75,6 +76,7 @@ function AddList({ setopenAddListModal, setListUpdated }: Props) {
 						)}
 					</Button>
 				</div>
+				</form>
 			</div>
 		</div>
 	);

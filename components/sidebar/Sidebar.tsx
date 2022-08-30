@@ -26,6 +26,7 @@ const Sidebar: NextPage = () => {
 			uid: '',
 			username: '',
 			email: '',
+			lists: [],
 		}));
 		Router.push('/');
 		closeHam();
