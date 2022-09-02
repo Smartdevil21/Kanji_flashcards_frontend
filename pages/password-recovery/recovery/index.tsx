@@ -33,6 +33,7 @@ function PasswordRecovery() {
 				);
 			setLoading(false);
 			alert("Password Updated Successfully!");
+			router.push('/');
 		} catch (error) {
 			console.log(`Err in updating the password: ${error}`);
 		}
