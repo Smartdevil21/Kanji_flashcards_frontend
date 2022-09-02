@@ -16,7 +16,7 @@
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_app.tsx"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "./prettierrc"],
   "paths": {
     "*": ["./node_modules/*", "./types/*"]
   }
