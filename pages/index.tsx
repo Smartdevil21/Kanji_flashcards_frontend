@@ -1,7 +1,7 @@
-import type { NextPage } from 'next';
-import Styles from '../styles/Home.module.scss';
-import Parent from '../components/parent/Parent';
-import { Button, CircularProgress, Stack, TextField } from '@mui/material';
+import type { NextPage } from "next";
+import Styles from "../styles/Home.module.scss";
+import Parent from "../components/parent/Parent";
+import { Button, CircularProgress, Stack, TextField } from "@mui/material";
 import {
 	useState,
 	Dispatch,
@@ -9,29 +9,29 @@ import {
 	useEffect,
 	useContext,
 	ChangeEvent,
-} from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Switch from '@mui/material/Switch';
-import { getAllKanjisByLevel } from '../typings/services/kanjis/getAllKanjisByLevels.service';
-import { KanjiEntry } from '../typings/interfaces/kanjis/kanjiList.interface';
-import KanjiCard from '../components/cards/KanjiCard';
-import MeaningCard from '../components/cards/MeaningCard';
-import { StatesContext } from './_app';
-import { getUserLists } from '../typings/services/lists/getUserLists.service';
-import { updateList } from '../typings/services/lists/updateList.service';
-import { vibrate } from '../utils/vibrate.helper';
-import Alert from '@mui/material/Alert';
-import Collapse from '@mui/material/Collapse';
-import { getKanjisByFilter } from '../typings/services/kanjis/getKanjisByFilter.service';
+} from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Switch from "@mui/material/Switch";
+import { getAllKanjisByLevel } from "../typings/services/kanjis/getAllKanjisByLevels.service";
+import { KanjiEntry } from "../typings/interfaces/kanjis/kanjiList.interface";
+import KanjiCard from "../components/cards/KanjiCard";
+import MeaningCard from "../components/cards/MeaningCard";
+import { StatesContext } from "./_app";
+import { getUserLists } from "../typings/services/lists/getUserLists.service";
+import { updateList } from "../typings/services/lists/updateList.service";
+import { vibrate } from "../utils/vibrate.helper";
+import Alert from "@mui/material/Alert";
+import Collapse from "@mui/material/Collapse";
+import { getKanjisByFilter } from "../typings/services/kanjis/getKanjisByFilter.service";
 
 const Home: NextPage = () => {
 	const { states, setStates } = useContext(StatesContext);
 	const [showKanjiCard, setShowKanjiCard] = useState(true);
-	const [cardListName, setCardListName] = useState('5');
+	const [cardListName, setCardListName] = useState("5");
 	const [alert, setAlert] = useState(!states.email_verified);
 	const [wordList, setWordList] = useState<KanjiEntry[]>([]);
 	const [showRandomKanjis, setShowRandomKanjis] = useState(true);
@@ -55,14 +55,19 @@ const Home: NextPage = () => {
 	async function getPreLoadDetails(): Promise<void> {
 		setLoading(true);
 		try {
-			if(['1','2','3','4','5'].includes(cardListName)){
+			// const db = await connectDB();
+			if (["1", "2", "3", "4", "5"].includes(cardListName)) {
 				const response1 = await getAllKanjisByLevel({ cardListName });
 				setWordList(response1.data.data);
-			}else{
-				const response1 = await getKanjisByFilter({ items: states.lists.filter((ele)=>ele.listName===cardListName)[0].listItems});
+			} else {
+				const response1 = await getKanjisByFilter({
+					items: states.lists.filter(
+						(ele) => ele.listName === cardListName
+					)[0].listItems,
+				});
 				setWordList(response1.data.data);
 				console.log(cardListName);
-			};
+			}
 			//Here to apply the /list/items request to get the kanjis of the list se;ected by the user.
 
 			// Apply useMemo here!!!
@@ -79,15 +84,15 @@ const Home: NextPage = () => {
 				// 		setStates((prev) => ({ ...prev, lists: result.data.data }));
 				// 		return result;
 				// 	} catch (error) {
-				// 		console.log(`Can't get the userLists in memo hook in index.tsx. Err: ${error}}`);	
+				// 		console.log(`Can't get the userLists in memo hook in index.tsx. Err: ${error}}`);
 				// 	}
 				// }, [states.lists]);
-			};
+			}
 		} catch (error) {
 			console.log(error);
 		}
 		setLoading(false);
-	};
+	}
 
 	async function addToList({
 		listName,
@@ -98,7 +103,7 @@ const Home: NextPage = () => {
 		try {
 			const response = await updateList({
 				word: wordList[counter.pointer].word,
-				action: 'add',
+				action: "add",
 				uid: states.uid,
 				listName,
 			});
@@ -116,7 +121,7 @@ const Home: NextPage = () => {
 			console.log(error);
 		}
 		setBookmarking(false);
-	};
+	}
 
 	const jumpToIndex = (e: ChangeEvent<HTMLInputElement>) => {
 		if (
@@ -140,7 +145,7 @@ const Home: NextPage = () => {
 		<Parent>
 			<div className={Styles.home_container}>
 				{loading ? (
-					<CircularProgress style={{ color: 'var(--orange)' }} />
+					<CircularProgress style={{ color: "var(--orange)" }} />
 				) : (
 					<>
 						{states.userLoggedIn && (
@@ -161,8 +166,8 @@ const Home: NextPage = () => {
 						)}
 						<div className={Styles.seqSwitcher}>
 							<Stack
-								direction={'row'}
-								alignItems={'center'}
+								direction={"row"}
+								alignItems={"center"}
 								spacing={0}
 							>
 								<label htmlFor="">Show Random Kanjis:</label>
@@ -178,15 +183,15 @@ const Home: NextPage = () => {
 										}));
 										setShowRandomKanjis(e.target.checked);
 									}}
-									inputProps={{ 'aria-label': 'controlled' }}
+									inputProps={{ "aria-label": "controlled" }}
 								/>
 							</Stack>
 						</div>
 						<Stack
-							direction={'row'}
+							direction={"row"}
 							spacing={1}
-							alignItems={'center'}
-							style={{ marginBottom: '10px' }}
+							alignItems={"center"}
+							style={{ marginBottom: "10px" }}
 						>
 							<Box sx={{ minWidth: 120 }}>
 								<FormControl fullWidth>
@@ -197,15 +202,23 @@ const Home: NextPage = () => {
 										labelId="demo-simple-select-label"
 										id="demo-simple-select"
 										value={cardListName}
-										size={'small'}
+										size={"small"}
 										label="Age"
 										onChange={handleChange}
 									>
-										<MenuItem value={'5'}>N5</MenuItem>
-										<MenuItem value={'4'}>N4</MenuItem>
-										{states.lists.map((list, index)=>{
-											if(list.listItems?.length===0)return;
-											return <MenuItem key={index} value={list.listName}>{list.listName}</MenuItem>
+										<MenuItem value={"5"}>N5</MenuItem>
+										<MenuItem value={"4"}>N4</MenuItem>
+										{states.lists.map((list, index) => {
+											if (list.listItems?.length === 0)
+												return;
+											return (
+												<MenuItem
+													key={index}
+													value={list.listName}
+												>
+													{list.listName}
+												</MenuItem>
+											);
 										})}
 										{/* <MenuItem value={'3'}>N3</MenuItem>
 									<MenuItem value={'2'}>N2</MenuItem>
@@ -214,20 +227,20 @@ const Home: NextPage = () => {
 								</FormControl>
 							</Box>
 							{!showRandomKanjis && (
-								<Stack direction={'row'} alignItems={'end'}>
+								<Stack direction={"row"} alignItems={"end"}>
 									<FormControl fullWidth>
 										<TextField
 											style={{ width: 80 }}
-											type={'number'}
+											type={"number"}
 											value={counter.pointer}
-											size={'small'}
-											label={'Jump to'}
+											size={"small"}
+											label={"Jump to"}
 											onChange={jumpToIndex}
 										/>
 									</FormControl>
 
 									<strong style={{ marginLeft: 10 }}>
-										{' '}
+										{" "}
 										/{wordList.length - 1}
 									</strong>
 								</Stack>
@@ -250,7 +263,7 @@ const Home: NextPage = () => {
 									disabled={counter.pointer <= 0}
 									style={{
 										opacity:
-											counter.pointer <= 0 ? '0.5' : '1',
+											counter.pointer <= 0 ? "0.5" : "1",
 									}}
 									onClick={() => {
 										if (counter.pointer === 0) return;
@@ -272,8 +285,8 @@ const Home: NextPage = () => {
 									{bookmarking ? (
 										<CircularProgress
 											style={{
-												color: 'var(--orange)',
-												marginRight: '20px',
+												color: "var(--orange)",
+												marginRight: "20px",
 											}}
 										/>
 									) : (
@@ -284,12 +297,12 @@ const Home: NextPage = () => {
 											<Select
 												labelId="demo-simple-select-label"
 												id="demo-simple-select"
-												value={'Choose List'}
-												size={'small'}
+												value={"Choose List"}
+												size={"small"}
 												label="Add to"
 												// onChange={handleChange}
 											>
-												<MenuItem value={'Choose List'}>
+												<MenuItem value={"Choose List"}>
 													<span>Choose List</span>
 												</MenuItem>
 												{states.lists.map(
@@ -342,8 +355,8 @@ const Home: NextPage = () => {
 									opacity:
 										!showRandomKanjis &&
 										counter.pointer == wordList.length - 1
-											? '0.5'
-											: '1',
+											? "0.5"
+											: "1",
 								}}
 								onClick={() => {
 									vibrate();

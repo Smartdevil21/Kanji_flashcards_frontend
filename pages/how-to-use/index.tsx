@@ -1,8 +1,16 @@
-import React from 'react';
-import Parent from '../../components/parent/Parent';
-import Styles from '../../styles/howToUse/howToUse.module.scss';
+import React, { useEffect } from "react";
+import Parent from "../../components/parent/Parent";
+import Styles from "../../styles/howToUse/howToUse.module.scss";
+import testService from "../../typings/testing.service";
 
-function index() {
+function Index() {
+	async function getTestResponse() {
+		const result = await testService();
+		console.log(result);
+	}
+	useEffect(() => {
+		getTestResponse();
+	}, []);
 	return (
 		<Parent>
 			<div className={Styles.howToUse}>
@@ -24,15 +32,16 @@ function index() {
 						Anyways, regarding the guide, you can start right off
 						just by visiting the homepage where you’ll see a card
 						with a kanji in it, that’s the flashcard. You’ll see a
-						kanji on the front side of the card. Make a guess
-						about meaning/reading of it and then once you think you’ve got
+						kanji on the front side of the card. Make a guess about
+						meaning/reading of it and then once you think you’ve got
 						it right, click on it and it will reveal the meaning,
 						kun & on reading of kanji with some examples.
 					</p>
 					<p>
 						To get another kanji, simply click on the “NEXT” button
 						which will be below the flashcard and it will give you
-						another random kanji of same level that you{"'"}ve selected.
+						another random kanji of same level that you{"'"}ve
+						selected.
 					</p>
 					<p>
 						If you want to change the kanji level you can do so by
@@ -44,8 +53,8 @@ function index() {
 					</p>
 					<strong>
 						<h2>
-							Get the most out of this project by making and verifying your
-							account!
+							Get the most out of this project by making and
+							verifying your account!
 						</h2>
 					</strong>
 					<p>Follow the process below:</p>
@@ -61,17 +70,20 @@ function index() {
 						back to this website and refresh.
 					</p>
 					<p>
-						If you’ve done the above steps correctly, you’ll see another select menu will appear next to
-						“Next” button on the homepage.
+						If you’ve done the above steps correctly, you’ll see
+						another select menu will appear next to “Next” button on
+						the homepage.
 					</p>
 					<p>
 						Now, if you want to bookmark a kanji for later
-						evaluation or revision, you can do so by selecting “Bookmarks” from
-						that select menu.
+						evaluation or revision, you can do so by selecting
+						“Bookmarks” from that select menu.
 					</p>
 					<p>
-						Now, for the best part, you{"'"}ll see two more options appeared on the menu: {'"'}My lists{'"'} and {'"'}Practice{'"'}. These two options appeared on the Menu are what make the
-						core of this project.
+						Now, for the best part, you{"'"}ll see two more options
+						appeared on the menu: {'"'}My lists{'"'} and {'"'}
+						Practice{'"'}. These two options appeared on the Menu
+						are what make the core of this project.
 					</p>
 					<ol>
 						<li>
@@ -98,7 +110,9 @@ function index() {
 							</p>
 							<ul>
 								<li>
-									<p>- Guess kanji based on its meaning, or</p>
+									<p>
+										- Guess kanji based on its meaning, or
+									</p>
 								</li>
 								<li>
 									<p>- Guess the meaning of the kanji</p>
@@ -115,7 +129,7 @@ function index() {
 					</ol>
 					<p>
 						Since this is a project made by us (college students),
-						it’s quite possible that you might come across some{' '}
+						it’s quite possible that you might come across some{" "}
 						<a href="https://techterms.com/definition/bug">bugs</a>.
 						So to report the bug or you might wish to share your
 						valuable feedbacks/opinions or criticism with us, We’ve
@@ -130,9 +144,9 @@ function index() {
 						Japanese a little easy.
 					</p>
 					<p>
-						Any comment, feedback, opinion, criticism, suggestion is welcomed!
-						So feel free to share it with us through the contact
-						form.
+						Any comment, feedback, opinion, criticism, suggestion is
+						welcomed! So feel free to share it with us through the
+						contact form.
 					</p>
 					<p>
 						<strong>では、一緒に頑張りましょう！</strong>
@@ -143,4 +157,4 @@ function index() {
 	);
 }
 
-export default index;
+export default Index;
