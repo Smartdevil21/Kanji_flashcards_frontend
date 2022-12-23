@@ -1,8 +1,8 @@
-import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 import {
 	FeedbackRequest,
 	FeedbackResponse,
-} from '../../interfaces/feedback/feedback.interface';
+} from "../../interfaces/feedback/feedback.interface";
 
 export function feedback({
 	username,
@@ -10,8 +10,8 @@ export function feedback({
 	message,
 }: FeedbackRequest): Promise<AxiosResponse<FeedbackResponse>> {
 	const config: AxiosRequestConfig = {
-		url: `${process.env.NEXT_PUBLIC_BASE_URL}/sendFeedback`,
-		method: 'POST',
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/feedback`,
+		method: "POST",
 		data: {
 			username,
 			email,

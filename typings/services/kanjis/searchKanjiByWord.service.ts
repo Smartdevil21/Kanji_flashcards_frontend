@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import {
 	SearchKanjiByWordRequest,
 	SearchKanjiByWordResponse,
-} from '../../interfaces/kanjis/searchKanjiByWord.interce';
+} from "../../interfaces/kanjis/searchKanjiByWord.interce";
 
 export function searchKanjiByWord({
 	keyword,
@@ -10,8 +10,8 @@ export function searchKanjiByWord({
 	AxiosResponse<SearchKanjiByWordResponse>
 > {
 	const config: AxiosRequestConfig = {
-		url: `${process.env.NEXT_PUBLIC_BASE_URL}/kanjis/search`,
-		method: 'POST',
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/kanji/search`,
+		method: "POST",
 		data: {
 			keyword,
 		},

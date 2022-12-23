@@ -1,20 +1,20 @@
-import React, { useEffect, useState, useContext } from 'react';
-import Parent from '../../components/parent/Parent';
-import Styles from '../../styles/practice/practice.module.scss';
-import CheckboxElement from '../../components/Checkbox/Checkbox';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { StatesContext } from '../_app';
-import { Button, CircularProgress } from '@mui/material';
-import Link from 'next/link';
-import { getUserLists } from '../../typings/services/lists/getUserLists.service';
-import { useRouter } from 'next/router';
-import { vibrate } from '../../utils/vibrate.helper';
+import React, { useEffect, useState, useContext } from "react";
+import Parent from "../../components/parent/Parent";
+import Styles from "../../styles/practice/practice.module.scss";
+import CheckboxElement from "../../components/Checkbox/Checkbox";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { StatesContext } from "../_app";
+import { Button, CircularProgress } from "@mui/material";
+import Link from "next/link";
+import { getUserLists } from "../../typings/services/lists/getUserLists.service";
+import { useRouter } from "next/router";
+import { vibrate } from "../../utils/vibrate.helper";
 
 function Practice() {
 	const router = useRouter();
 	const { states, setStates } = useContext(StatesContext);
-	const [mode, setMode] = useState('single-select');
+	const [mode, setMode] = useState("single-select");
 	const [userListNames, setUserListNames] = useState<string[]>([]);
 	const [loading, setLoading] = useState(false);
 
@@ -22,12 +22,11 @@ function Practice() {
 		event: React.MouseEvent<HTMLElement>,
 		newMode: string
 	) => {
-		vibrate();
 		setMode(newMode);
 	};
 
 	const getUserListTrigger = async () => {
-		if (!states.username) return router.push('/');
+		if (!states.username) return router.push("/");
 		setLoading(true);
 		try {
 			const response = await getUserLists({ uid: states.uid as string });
@@ -59,7 +58,7 @@ function Practice() {
 						value={mode}
 						exclusive
 						onChange={handleChange}
-						size={'small'}
+						size={"small"}
 					>
 						<ToggleButton
 							value="single-select"
@@ -89,15 +88,15 @@ function Practice() {
 								mode={mode}
 							/> */}
 							<CheckboxElement
-								opt={'Kanji[N5]'}
-								ans={''}
+								opt={"Kanji[N5]"}
+								ans={""}
 								selected={states?.practiceOpt}
 								setState={setStates}
 								mode={mode}
 							/>
 							<CheckboxElement
-								opt={'Kanji[N4]'}
-								ans={''}
+								opt={"Kanji[N4]"}
+								ans={""}
 								selected={states?.practiceOpt}
 								setState={setStates}
 								mode={mode}
@@ -134,7 +133,7 @@ function Practice() {
 									<CheckboxElement
 										key={index}
 										opt={ele}
-										ans={''}
+										ans={""}
 										selected={states?.practiceOpt}
 										setState={setStates}
 										mode={mode}
@@ -148,12 +147,12 @@ function Practice() {
 						style={{
 							pointerEvents:
 								states.practiceOpt.length === 0
-									? 'none'
-									: 'all',
+									? "none"
+									: "all",
 							opacity: states.practiceOpt.length === 0 ? 0.5 : 1,
 						}}
 					>
-						<Link href={'/practice/type'} passHref>
+						<Link href={"/practice/type"} passHref>
 							<Button onClick={vibrate}>Next</Button>
 						</Link>
 					</div>
@@ -161,7 +160,7 @@ function Practice() {
 			) : (
 				<CircularProgress
 					style={{
-						color: 'var(--orange)',
+						color: "var(--orange)",
 					}}
 				/>
 			)}

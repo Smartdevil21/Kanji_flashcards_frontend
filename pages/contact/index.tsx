@@ -1,36 +1,35 @@
-import { Button, CircularProgress, Stack, TextField } from '@mui/material';
-import type { NextPage } from 'next';
-import { useState, useContext } from 'react';
-import Parent from '../../components/parent/Parent';
-import Styles from '../../styles/contact/contact.module.scss';
-import { StatesContext } from '../_app';
-import { feedback } from '../../typings/services/feedback/feedback.service';
-import { vibrate } from '../../utils/vibrate.helper';
+import { Button, CircularProgress, Stack, TextField } from "@mui/material";
+import type { NextPage } from "next";
+import { useState, useContext } from "react";
+import Parent from "../../components/parent/Parent";
+import Styles from "../../styles/contact/contact.module.scss";
+import { StatesContext } from "../_app";
+import { feedback } from "../../typings/services/feedback/feedback.service";
+import { vibrate } from "../../utils/vibrate.helper";
 
 const Contact: NextPage = () => {
 	const { states } = useContext(StatesContext);
 	const [loading, setLoading] = useState(false);
 	const [contactMsg, setContactMsg] = useState({
-		username: states.username || '',
-		email: states.email || '',
-		message: '',
+		username: states.username || "",
+		email: states.email || "",
+		message: "",
 	});
 
 	const feedBackTrigger = async () => {
-		vibrate();
 		setLoading(true);
 		try {
 			if (
-				contactMsg.username === '' ||
-				contactMsg.email === '' ||
-				contactMsg.message === ''
+				contactMsg.username === "" ||
+				contactMsg.email === "" ||
+				contactMsg.message === ""
 			) {
-				alert('Provide proper details!');
-				throw new Error('Provide proper details!');
+				alert("Provide proper details!");
+				throw new Error("Provide proper details!");
 			}
 			const response = await feedback(contactMsg);
-			alert('Thanks! We appriciate your submission!');
-			setContactMsg((prev) => ({ ...prev, message: '' }));
+			alert("Thanks! We appriciate your submission!");
+			setContactMsg((prev) => ({ ...prev, message: "" }));
 		} catch (error) {
 			console.log(error);
 		}
@@ -51,7 +50,7 @@ const Contact: NextPage = () => {
 							(Please provide appropriate and accurate details.)
 						</h3> */}
 						<form>
-							<Stack direction={'column'} spacing={2}>
+							<Stack direction={"column"} spacing={2}>
 								<TextField
 									name="Username"
 									label="Username"
@@ -64,8 +63,8 @@ const Contact: NextPage = () => {
 											username: e.target.value,
 										}));
 									}}
-									variant={'outlined'}
-									size={'small'}
+									variant={"outlined"}
+									size={"small"}
 								/>
 								<TextField
 									name="Email"
@@ -78,8 +77,8 @@ const Contact: NextPage = () => {
 											email: e.target.value,
 										}));
 									}}
-									variant={'outlined'}
-									size={'small'}
+									variant={"outlined"}
+									size={"small"}
 								/>
 								<TextField
 									name="Feedback"
@@ -93,29 +92,29 @@ const Contact: NextPage = () => {
 											message: e.target.value,
 										}));
 									}}
-									variant={'outlined'}
+									variant={"outlined"}
 									multiline
 									minRows={4}
-									size={'small'}
+									size={"small"}
 								/>
 							</Stack>
 							<div className={Styles.submit_btn}>
 								<Button
 									onClick={feedBackTrigger}
 									style={{
-										pointerEvents: loading ? 'none' : 'all',
+										pointerEvents: loading ? "none" : "all",
 									}}
 								>
 									{loading ? (
 										<CircularProgress
 											style={{
-												width: '24px',
-												height: '24px',
-												color: '#f9f9f9',
+												width: "24px",
+												height: "24px",
+												color: "#f9f9f9",
 											}}
 										/>
 									) : (
-										'Submit'
+										"Submit"
 									)}
 								</Button>
 							</div>

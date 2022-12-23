@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import {
 	GetAllKanjisByLevelResponse,
 	GetAllKanjisByLevelRequest,
-} from '../../interfaces/kanjis/getAllKanjisByLevel.interface';
+} from "../../interfaces/kanjis/getAllKanjisByLevel.interface";
 
 export function getAllKanjisByLevel({
 	cardListName,
@@ -10,8 +10,8 @@ export function getAllKanjisByLevel({
 	AxiosResponse<GetAllKanjisByLevelResponse>
 > {
 	const config: AxiosRequestConfig = {
-		url: `${process.env.NEXT_PUBLIC_BASE_URL}/kanjis?level=${cardListName}`,
-		method: 'GET',
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/kanji/level?l=${cardListName}`,
+		method: "GET",
 	};
 	return axios.request<GetAllKanjisByLevelResponse>(config);
 }

@@ -4,10 +4,10 @@ import React, {
 	useContext,
 	Dispatch,
 	SetStateAction,
-} from 'react';
-import Parent from '../../../../components/parent/Parent';
-import { useRouter } from 'next/router';
-import Styles from '../../../../styles/practice/start.module.scss';
+} from "react";
+import Parent from "../../../../components/parent/Parent";
+import { useRouter } from "next/router";
+import Styles from "../../../../styles/practice/start.module.scss";
 import {
 	FormControl,
 	FormControlLabel,
@@ -15,17 +15,17 @@ import {
 	Stack,
 	CircularProgress,
 	Button,
-} from '@mui/material';
-import { Icon } from '@iconify/react';
-import DangerousIcon from '@mui/icons-material/Dangerous';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { StatesContext } from '../../../_app';
-import { getAllKanjisByLevel } from '../../../../typings/services/kanjis/getAllKanjisByLevels.service';
-import { getUserLists } from '../../../../typings/services/lists/getUserLists.service';
-import { getKanjisByFilter } from '../../../../typings/services/kanjis/getKanjisByFilter.service';
-import { KanjiEntry } from '../../../../typings/interfaces/kanjis/kanjiList.interface';
-import { getEveryKanji } from '../../../../typings/services/kanjis/getEveryKanji.service';
-import { vibrate } from '../../../../utils/vibrate.helper';
+} from "@mui/material";
+import { Icon } from "@iconify/react";
+import DangerousIcon from "@mui/icons-material/Dangerous";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { StatesContext } from "../../../_app";
+import { getAllKanjisByLevel } from "../../../../typings/services/kanjis/getAllKanjisByLevels.service";
+import { getUserLists } from "../../../../typings/services/lists/getUserLists.service";
+import { getKanjisByFilter } from "../../../../typings/services/kanjis/getKanjisByFilter.service";
+import { KanjiEntry } from "../../../../typings/interfaces/kanjis/kanjiList.interface";
+import { getEveryKanji } from "../../../../typings/services/kanjis/getEveryKanji.service";
+import { vibrate } from "../../../../utils/vibrate.helper";
 
 interface QuestionDetails {
 	questionsKanjis: KanjiEntry[];
@@ -60,7 +60,7 @@ function CreateOptions({
 	counter,
 	setCounter,
 }: CreateOptProps) {
-	const [selectedAns, setSelectedAns] = useState('');
+	const [selectedAns, setSelectedAns] = useState("");
 	const Router = useRouter();
 
 	function Opt({ opt }: { opt: string }) {
@@ -71,7 +71,6 @@ function CreateOptions({
 						onClick={() => {
 							setSelectedAns(opt);
 							if (answer === opt) {
-								vibrate();
 								setTimeout(() => {
 									if (counter.count < length) {
 										setCounter((prev) => ({
@@ -79,7 +78,7 @@ function CreateOptions({
 											count: prev.count + 1,
 											correct: prev.correct + 1,
 										}));
-										setSelectedAns('');
+										setSelectedAns("");
 										changeQuestion();
 									} else {
 										alert(
@@ -90,7 +89,7 @@ function CreateOptions({
 													100
 											)}%`
 										);
-										Router.push('/practice');
+										Router.push("/practice");
 									}
 								}, 1000);
 							} else {
@@ -103,11 +102,11 @@ function CreateOptions({
 						control={
 							<Checkbox
 								sx={{
-									'&.Mui-checked': {
+									"&.Mui-checked": {
 										color:
 											selectedAns === answer
-												? 'green'
-												: 'red',
+												? "green"
+												: "red",
 									},
 								}}
 								checked={selectedAns === opt}
@@ -143,29 +142,29 @@ function Game() {
 	const [quesDetails, setQuesDetails] = useState<QuestionDetails>({
 		questionsKanjis: [],
 		question: {
-			_id: '',
+			_id: "",
 			__v: 0,
-			meaning: '',
-			word: '',
-			level: '',
+			meaning: "",
+			word: "",
+			level: "",
 			on_reading: {
 				example: {
-					eg: '',
-					meaning: '',
-					pronounciation: '',
+					eg: "",
+					meaning: "",
+					pronounciation: "",
 				},
-				reading: '',
+				reading: "",
 			},
 			kun_reading: {
 				example: {
-					eg: '',
-					meaning: '',
-					pronounciation: '',
+					eg: "",
+					meaning: "",
+					pronounciation: "",
 				},
-				reading: '',
+				reading: "",
 			},
 		},
-		answer: '',
+		answer: "",
 		answerArr: [],
 	});
 	const [loading, setLoading] = useState(false);
@@ -179,15 +178,15 @@ function Game() {
 	const [allKanjis, setAllKanjis] = useState<KanjiEntry[]>([]);
 
 	const getAllKanjisOfSelectedLists = async () => {
-		if (!states.username) return router.push('/');
+		if (!states.username) return router.push("/");
 		setLoading(true);
 		try {
 			const basicLists = {
-				'Kanji[N5]': '5',
-				'Kanji[N4]': '4',
-				'Kanji[N3]': '3',
-				'Kanji[N2]': '2',
-				'Kanji[N1]': '1',
+				"Kanji[N5]": "5",
+				"Kanji[N4]": "4",
+				"Kanji[N3]": "3",
+				"Kanji[N2]": "2",
+				"Kanji[N1]": "1",
 			};
 			const userListsResponse = await getUserLists({
 				uid: states.uid as string,
@@ -246,7 +245,7 @@ function Game() {
 					)
 				];
 		}
-		if (router.query.m === 'kbm') {
+		if (router.query.m === "kbm") {
 			allKanjis.map((item, index) => {
 				if (item === quesDetails.question) return;
 				kanjiMeaningsOrWordsArr.push(item.meaning);
@@ -258,7 +257,7 @@ function Game() {
 			});
 		}
 		function getArrItem() {
-			let opt: string = '';
+			let opt: string = "";
 			function getKanjiMeaning() {
 				let result =
 					kanjiMeaningsOrWordsArr[
@@ -273,12 +272,12 @@ function Game() {
 					return result;
 				}
 			}
-			if (router.query.m === 'kbm') {
+			if (router.query.m === "kbm") {
 				const kanjiMeaning = getKanjiMeaning();
 				const q = Math.floor(
-					Math.random() * (kanjiMeaning.split(', ').length - 1)
+					Math.random() * (kanjiMeaning.split(", ").length - 1)
 				);
-				opt = kanjiMeaning.split(', ')[q];
+				opt = kanjiMeaning.split(", ")[q];
 			} else {
 				opt =
 					kanjiMeaningsOrWordsArr[
@@ -286,7 +285,7 @@ function Game() {
 							Math.random() * kanjiMeaningsOrWordsArr.length
 						)
 					];
-			};
+			}
 			if (arr.indexOf(opt) !== -1) {
 				getArrItem();
 				return opt;
@@ -300,10 +299,10 @@ function Game() {
 			const possibleOpt = getArrItem();
 			arr.push(possibleOpt);
 		}
-		let ans: string = '';
-		if (router.query.m === 'kbm') {
-			ans = question?.meaning.split(', ')[
-				Math.floor(Math.random() * question?.meaning.split(', ').length)
+		let ans: string = "";
+		if (router.query.m === "kbm") {
+			ans = question?.meaning.split(", ")[
+				Math.floor(Math.random() * question?.meaning.split(", ").length)
 			] as string;
 		} else {
 			ans = question.word;
@@ -326,25 +325,25 @@ function Game() {
 		<Parent>
 			<div className={Styles.game}>
 				<h2>
-					{router.query.m === 'kbm'
-						? 'Guess the Kanji by its meaning.'
-						: 'Guess the meaning of the Kanji.'}
+					{router.query.m === "kbm"
+						? "Guess the Kanji by its meaning."
+						: "Guess the meaning of the Kanji."}
 				</h2>
 				{/* <Button onClick={changeQuestion}>change</Button> */}
 				<div className={Styles.score}>
 					<h4>Your Score</h4>
 					<Stack
-						direction={'row'}
+						direction={"row"}
 						spacing={3}
-						alignItems={'center'}
-						justifyContent={'center'}
+						alignItems={"center"}
+						justifyContent={"center"}
 					>
 						<p>
 							<span>
 								<Icon
 									style={{
-										transform: 'translateY(2.5px)',
-										color: 'green',
+										transform: "translateY(2.5px)",
+										color: "green",
 									}}
 									icon="charm:tick"
 								/>
@@ -355,8 +354,8 @@ function Game() {
 							<span>
 								<Icon
 									style={{
-										transform: 'translateY(2.5px)',
-										color: 'red',
+										transform: "translateY(2.5px)",
+										color: "red",
 									}}
 									icon="akar-icons:cross"
 								/>
@@ -372,7 +371,7 @@ function Game() {
 					start ? (
 						<div className={Styles.question}>
 							<h1>
-								{router.query.m === 'kbm'
+								{router.query.m === "kbm"
 									? quesDetails.question?.word
 									: quesDetails.question.meaning}
 							</h1>
@@ -390,7 +389,6 @@ function Game() {
 					) : (
 						<Button
 							onClick={() => {
-								vibrate();
 								setLoading(true);
 								changeQuestion();
 								setTimeout(() => {
@@ -398,7 +396,7 @@ function Game() {
 									setStart(true);
 								}, 1500);
 							}}
-							style={{height:"fit-content"}}
+							style={{ height: "fit-content" }}
 						>
 							Start
 						</Button>
@@ -406,8 +404,8 @@ function Game() {
 				) : (
 					<CircularProgress
 						style={{
-							color: 'var(--orange)',
-							marginTop: '25px',
+							color: "var(--orange)",
+							marginTop: "25px",
 						}}
 					/>
 				)}

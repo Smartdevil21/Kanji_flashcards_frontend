@@ -18,7 +18,6 @@ function Login() {
 	});
 
 	async function loginFunc() {
-		vibrate();
 		setLoading(true);
 		try {
 			const response = await loginUser(loginDetails);

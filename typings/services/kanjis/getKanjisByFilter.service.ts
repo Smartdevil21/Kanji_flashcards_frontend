@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import {
 	GetKanjisByFilterRequest,
 	GetKanjisByFilterResponse,
-} from '../../interfaces/kanjis/getKanjisByFilter.interface';
+} from "../../interfaces/kanjis/getKanjisByFilter.interface";
 
 export function getKanjisByFilter({
 	level,
@@ -11,8 +11,8 @@ export function getKanjisByFilter({
 	AxiosResponse<GetKanjisByFilterResponse>
 > {
 	const config: AxiosRequestConfig = {
-		url: `${process.env.NEXT_PUBLIC_BASE_URL}/kanjis/filter`,
-		method: 'POST',
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/kanji/filter`,
+		method: "POST",
 		data: {
 			level,
 			items,
