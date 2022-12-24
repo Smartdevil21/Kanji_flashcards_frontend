@@ -95,7 +95,7 @@ const Sidebar: NextPage = () => {
 							Styles.sidebar_link_active
 						}`}`}
 					>
-						<Link href="/how-to-use">How to use</Link>
+						<Link href="/how-to-use">Hidden Features</Link>
 					</li>
 					<li className={`${Styles.sidebar_links} ${Styles.logout}`}>
 						{states.userLoggedIn ? (

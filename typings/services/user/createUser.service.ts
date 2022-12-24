@@ -10,7 +10,7 @@ export function createUser({
 	password,
 }: CreateUserRequest): Promise<AxiosResponse<CreateUserResponse>> {
 	const config: AxiosRequestConfig = {
-		url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/autj/signup`,
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signup`,
 		method: "POST",
 		data: {
 			username,
