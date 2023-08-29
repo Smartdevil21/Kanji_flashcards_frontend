@@ -47,7 +47,8 @@ function AddKanjisPage() {
 	};
 
 	useEffect(() => {
-		if (states.uid !== "63a648607f0287ab2256931c") router.push("/login");
+		if (states.uid !== process.env.NEXT_PUBLIC_SUPER_ADMIN_ID)
+			router.push("/login");
 	}, []);
 	return (
 		<Parent>
