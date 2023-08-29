@@ -1,0 +1,12 @@
+.add_kanjis_page {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 80%;
+	.on_reading_example,
+	.kun_reading_example {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+}

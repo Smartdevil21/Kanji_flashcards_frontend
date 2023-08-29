@@ -218,8 +218,8 @@ const Home: NextPage = () => {
 												</MenuItem>
 											);
 										})}
-										{/* <MenuItem value={'3'}>N3</MenuItem>
-									<MenuItem value={'2'}>N2</MenuItem>
+										<MenuItem value={"3"}>N3</MenuItem>
+										{/*<MenuItem value={'2'}>N2</MenuItem>
 									<MenuItem value={'1'}>N1</MenuItem> */}
 									</Select>
 								</FormControl>
@@ -230,7 +230,7 @@ const Home: NextPage = () => {
 										<TextField
 											style={{ width: 80 }}
 											type={"number"}
-											value={counter.pointer}
+											value={counter.pointer + 1}
 											size={"small"}
 											label={"Jump to"}
 											onChange={jumpToIndex}
@@ -239,7 +239,7 @@ const Home: NextPage = () => {
 
 									<strong style={{ marginLeft: 10 }}>
 										{" "}
-										/{wordList.length - 1}
+										/{wordList.length}
 									</strong>
 								</Stack>
 							)}

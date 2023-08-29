@@ -1,0 +1,21 @@
+{
+	"word": "安",
+	"meaning": "Peace, cheap, safety",
+	"on_reading": {
+		"reading": "アン",
+		"example": {
+			"eg": "安心",
+			"meaning": "relief",
+			"pronounciation": "anshin"
+		}
+	},
+	"kun_reading": {
+		"reading": "やす",
+		"example": {
+			"eg": "安い",
+			"meaning": "cheap",
+			"pronounciation": "yasui"
+		}
+	},
+	"level": "5"
+}
