@@ -31,13 +31,15 @@ const MeaningCard = ({ setShowKanjiCard, currentWord }: CardProps) => {
 					<strong>Eg. </strong>
 					{currentWord.kun_reading.reading && (
 						<>
-							{currentWord?.kun_reading?.example?.eg}(
-							{currentWord?.kun_reading?.example?.pronounciation}
-							),{" "}
+							{currentWord?.kun_reading?.example?.eg} [{" "}
+							{currentWord?.kun_reading?.example?.pronounciation}{" "}
+							- {currentWord?.kun_reading?.example?.meaning} ],{" "}
 						</>
 					)}
-					{currentWord?.on_reading?.example?.eg}(
-					{currentWord?.on_reading?.example?.pronounciation})
+					<br />
+					{currentWord?.on_reading?.example?.eg} [{" "}
+					{currentWord?.on_reading?.example?.pronounciation} -{" "}
+					{currentWord?.on_reading?.example?.meaning} ]
 				</p>
 			</div>
 		</>
