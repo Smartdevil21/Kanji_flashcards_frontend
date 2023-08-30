@@ -7,38 +7,20 @@ import Parent from "../../../components/parent/Parent";
 import axios from "axios";
 import { addKanji } from "../../../typings/services/kanjis/addKanji.service";
 import { Kanji } from "../../../typings/interfaces/kanjis/kanjiList.interface";
+import { defaultKanji } from "../../../typings/interfaces/kanjis/kanji.interface";
 
 function AddKanjisPage() {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	const { states } = useContext(StatesContext);
-	const [wordData, setWordData] = useState<Kanji>({
-		word: "",
-		meaning: "",
-		on_reading: {
-			reading: "",
-			example: {
-				eg: "",
-				meaning: "",
-				pronounciation: "",
-			},
-		},
-		kun_reading: {
-			reading: "",
-			example: {
-				eg: "",
-				meaning: "",
-				pronounciation: "",
-			},
-		},
-		level: "3",
-	});
+	const [wordData, setWordData] = useState<Kanji>(defaultKanji);
 
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		setLoading(true);
 		e.preventDefault();
 		try {
 			const result = await addKanji(wordData);
+			setWordData(defaultKanji);
 			console.log(result);
 		} catch (error) {
 			console.log("Err in adding kanjis:", error);
