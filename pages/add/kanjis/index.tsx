@@ -109,23 +109,6 @@ function AddKanjisPage() {
 						}}
 					/>
 					<TextField
-						label={"Meaning"}
-						size={"small"}
-						value={wordData.on_reading.example.meaning}
-						onChange={(e) => {
-							setWordData((prev) => ({
-								...prev,
-								on_reading: {
-									...prev.on_reading,
-									example: {
-										...prev.on_reading.example,
-										meaning: e.target.value,
-									},
-								},
-							}));
-						}}
-					/>
-					<TextField
 						label={"Pronounciation"}
 						size={"small"}
 						value={wordData.on_reading.example.pronounciation}
@@ -137,6 +120,23 @@ function AddKanjisPage() {
 									example: {
 										...prev.on_reading.example,
 										pronounciation: e.target.value,
+									},
+								},
+							}));
+						}}
+					/>
+					<TextField
+						label={"Meaning"}
+						size={"small"}
+						value={wordData.on_reading.example.meaning}
+						onChange={(e) => {
+							setWordData((prev) => ({
+								...prev,
+								on_reading: {
+									...prev.on_reading,
+									example: {
+										...prev.on_reading.example,
+										meaning: e.target.value,
 									},
 								},
 							}));
@@ -180,23 +180,7 @@ function AddKanjisPage() {
 							}));
 						}}
 					/>
-					<TextField
-						label={"Meaning"}
-						size={"small"}
-						value={wordData.kun_reading.example.meaning}
-						onChange={(e) => {
-							setWordData((prev) => ({
-								...prev,
-								kun_reading: {
-									...prev.kun_reading,
-									example: {
-										...prev.kun_reading.example,
-										meaning: e.target.value,
-									},
-								},
-							}));
-						}}
-					/>
+
 					<TextField
 						label={"Pronounciation"}
 						size={"small"}
@@ -209,6 +193,23 @@ function AddKanjisPage() {
 									example: {
 										...prev.kun_reading.example,
 										pronounciation: e.target.value,
+									},
+								},
+							}));
+						}}
+					/>
+					<TextField
+						label={"Meaning"}
+						size={"small"}
+						value={wordData.kun_reading.example.meaning}
+						onChange={(e) => {
+							setWordData((prev) => ({
+								...prev,
+								kun_reading: {
+									...prev.kun_reading,
+									example: {
+										...prev.kun_reading.example,
+										meaning: e.target.value,
 									},
 								},
 							}));
