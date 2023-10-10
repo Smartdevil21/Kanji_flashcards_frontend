@@ -230,7 +230,7 @@ const Home: NextPage = () => {
 										<TextField
 											style={{ width: 80 }}
 											type={"number"}
-											value={counter.pointer + 1}
+											value={counter.pointer}
 											size={"small"}
 											label={"Jump to"}
 											onChange={jumpToIndex}
@@ -239,7 +239,7 @@ const Home: NextPage = () => {
 
 									<strong style={{ marginLeft: 10 }}>
 										{" "}
-										/{wordList.length}
+										/{wordList.length - 1}
 									</strong>
 								</Stack>
 							)}
