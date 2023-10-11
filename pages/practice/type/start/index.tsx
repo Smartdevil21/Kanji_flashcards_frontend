@@ -167,7 +167,7 @@ function Game() {
 		answer: "",
 		answerArr: [],
 	});
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [coveredQuestions, setCoveredQuestions] = useState<string[]>([]);
 	const [start, setStart] = useState(false);
 	const [counter, setCounter] = useState({
@@ -220,16 +220,17 @@ function Game() {
 
 	const getRandomUncoveredQuestion = () => {
 		const q = Math.floor(
-			Math.random() * quesDetails.questionsKanjis.length
+			Math.random() * (quesDetails.questionsKanjis.length - 1)
 		);
-		const que = quesDetails.questionsKanjis[q];
-		if (coveredQuestions.indexOf(que.word) !== -1) {
-			getRandomUncoveredQuestion();
-			return que;
-		} else {
-			setCoveredQuestions((prev) => [...prev, que.word]);
-			return que;
+		let que = quesDetails.questionsKanjis[q];
+		while (coveredQuestions.includes(que.word)) {
+			const q = Math.floor(
+				Math.random() * quesDetails.questionsKanjis.length
+			);
+			que = quesDetails.questionsKanjis[q];
 		}
+		setCoveredQuestions((prev) => [...prev, que.word]);
+		return que;
 	};
 
 	const changeQuestion = () => {
@@ -247,12 +248,12 @@ function Game() {
 		}
 		if (router.query.m === "kbm") {
 			allKanjis.map((item, index) => {
-				if (item === quesDetails.question) return;
+				if (item?.word === quesDetails?.question?.word) return;
 				kanjiMeaningsOrWordsArr.push(item.meaning);
 			});
 		} else {
 			allKanjis.map((item, index) => {
-				if (item === quesDetails.question) return;
+				if (item?.word === quesDetails?.question?.word) return;
 				kanjiMeaningsOrWordsArr.push(item.word);
 			});
 		}
