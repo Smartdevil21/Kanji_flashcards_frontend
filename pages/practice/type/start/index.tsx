@@ -287,12 +287,10 @@ function Game() {
 						)
 					];
 			}
-			if (arr.indexOf(opt) !== -1) {
+			if (arr.includes(opt)) {
 				getArrItem();
-				return opt;
-			} else {
-				return opt;
 			}
+			return opt;
 		}
 
 		let arr: string[] = [];
