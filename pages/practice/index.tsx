@@ -101,13 +101,14 @@ function Practice() {
 								setState={setStates}
 								mode={mode}
 							/>
-							{/* <CheckboxElement
-								opt={'Kanji[N3]'}
-								ans={''}
+							<CheckboxElement
+								opt={"Kanji[N3]"}
+								ans={""}
 								selected={states?.practiceOpt}
 								setState={setStates}
 								mode={mode}
 							/>
+							{/*
 							<CheckboxElement
 								opt={'Kanji[N2]'}
 								ans={''}
