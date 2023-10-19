@@ -14,7 +14,7 @@ const KanjiCard = ({ setShowKanjiCard, currentWord }: CardProps) => {
 					setShowKanjiCard((prev) => !prev);
 				}}
 			>
-				<h1>{currentWord?.word}</h1>
+				<span className={Styles.word}>{currentWord?.word}</span>
 			</div>
 		</>
 	);

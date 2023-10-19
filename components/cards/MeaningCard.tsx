@@ -14,7 +14,7 @@ const MeaningCard = ({ setShowKanjiCard, currentWord }: CardProps) => {
 					setShowKanjiCard((prev) => !prev);
 				}}
 			>
-				<h1>{currentWord?.word}</h1>
+				<span className={Styles.word}>{currentWord?.word}</span>
 				<h3>{currentWord?.meaning}</h3>
 				{currentWord.kun_reading.reading && (
 					<p>

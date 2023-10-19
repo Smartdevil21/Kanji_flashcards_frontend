@@ -12,15 +12,15 @@
 		font-size: small;
 		font-weight: bold;
 	}
-	strong{
+	strong {
 		font-family: var(--parah_font);
-		color: var(--grey)
+		color: var(--grey);
 	}
 	select {
 		background-color: #f2f2f2;
 		margin-bottom: 10px;
 	}
-	.seqSwitcher{
+	.seqSwitcher {
 		position: absolute;
 		top: 10px;
 		right: 10px;
@@ -40,7 +40,7 @@
 		flex-direction: column;
 		cursor: pointer;
 		padding: 20px;
-		h1 {
+		.word {
 			font-family: var(--japanese_font);
 			color: var(--black);
 			font-size: 48px;
@@ -77,17 +77,18 @@
 	}
 }
 
-@media only screen and (max-width:750px){
-	.home_container{
+@media only screen and (max-width: 750px) {
+	.home_container {
 		height: calc(100vh - 70px);
-		.kanji_card, .meaning_card{
+		.kanji_card,
+		.meaning_card {
 			width: 90%;
 			height: fit-content;
 		}
-		.kanji_card{
+		.kanji_card {
 			min-height: 40%;
 		}
-		.meaning_card{
+		.meaning_card {
 			min-height: 40%;
 		}
 	}
