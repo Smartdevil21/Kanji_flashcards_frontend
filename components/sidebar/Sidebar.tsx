@@ -83,6 +83,14 @@ const Sidebar: NextPage = () => {
 					<li
 						onClick={closeHam}
 						className={`${Styles.sidebar_links} ${
+							pagename === "search" && Styles.sidebar_link_active
+						}`}
+					>
+						<Link href="/search">Search</Link>
+					</li>
+					<li
+						onClick={closeHam}
+						className={`${Styles.sidebar_links} ${
 							pagename === "contact" && Styles.sidebar_link_active
 						}`}
 					>
