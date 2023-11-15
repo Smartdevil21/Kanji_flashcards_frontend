@@ -26,6 +26,7 @@ import { getKanjisByFilter } from "../../../../typings/services/kanjis/getKanjis
 import { KanjiEntry } from "../../../../typings/interfaces/kanjis/kanjiList.interface";
 import { getEveryKanji } from "../../../../typings/services/kanjis/getEveryKanji.service";
 import { vibrate } from "../../../../utils/vibrate.helper";
+import { ListData } from "../../../../typings/interfaces/lists/getUserLists.interface";
 
 interface QuestionDetails {
 	questionsKanjis: KanjiEntry[];
@@ -139,6 +140,7 @@ function CreateOptions({
 function Game() {
 	const router = useRouter();
 	const { states } = useContext(StatesContext);
+	const { practiceOpt, lists } = states;
 	const [quesDetails, setQuesDetails] = useState<QuestionDetails>({
 		questionsKanjis: [],
 		question: {
@@ -169,6 +171,7 @@ function Game() {
 	});
 	const [loading, setLoading] = useState(true);
 	const [coveredQuestions, setCoveredQuestions] = useState<string[]>([]);
+	const [gameLength, setGameLength] = useState(0);
 	const [start, setStart] = useState(false);
 	const [counter, setCounter] = useState({
 		count: 0,
@@ -176,6 +179,42 @@ function Game() {
 		wrong: 0,
 	});
 	const [allKanjis, setAllKanjis] = useState<KanjiEntry[]>([]);
+
+	useEffect(() => {
+		if (router.query.l === "all") {
+			// lists.map((list) => {
+			// 	if (practiceOpt.includes(list.listName)) {
+			// 		setGameLength((prev) => (prev += list.listItems.length));
+			// 	}
+			// });
+
+			practiceOpt.map((opt) => {
+				lists.map((list) => {
+					if (list.listName === opt) {
+						setGameLength(
+							(prev) => (prev += list.listItems.length)
+						);
+					}
+				});
+				switch (opt) {
+					case "Kanji[N5]":
+						setGameLength((prev) => (prev += 100));
+						break;
+					case "Kanji[N4]":
+						setGameLength((prev) => (prev += 144));
+						break;
+					case "Kanji[N3]":
+						setGameLength((prev) => (prev += 300));
+						break;
+					default:
+						break;
+				}
+			});
+		} else {
+			setGameLength(Number(router.query.l));
+		}
+	}, [router.query.l]);
+	console.log({ gameLength, practiceOpt, lists });
 
 	const getAllKanjisOfSelectedLists = async () => {
 		if (!states.username) return router.push("/");
@@ -363,7 +402,7 @@ function Game() {
 						</p>
 					</Stack>
 					<p className={Styles.counter}>
-						{counter.count}/{router.query.l}
+						{counter.count}/{gameLength}
 					</p>
 				</div>
 				{!loading ? (
@@ -379,7 +418,7 @@ function Game() {
 									answer={quesDetails.answer}
 									changeQuestion={changeQuestion}
 									optArr={quesDetails.answerArr}
-									length={Number(router.query.l)}
+									length={Number(gameLength)}
 									counter={counter}
 									setCounter={setCounter}
 								/>

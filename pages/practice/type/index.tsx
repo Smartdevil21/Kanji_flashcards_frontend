@@ -1,12 +1,18 @@
-import { FormControlLabel, FormControl, Checkbox, Button } from '@mui/material';
-import Link from 'next/link';
-import React, { useState, useContext, Dispatch, SetStateAction, useEffect } from 'react';
-import CheckboxElement from '../../../components/Checkbox/Checkbox';
-import Parent from '../../../components/parent/Parent';
-import Styles from '../../../styles/practice/Type.module.scss';
-import { StatesContext } from '../../_app';
-import { useRouter } from 'next/router';
-import { vibrate } from '../../../utils/vibrate.helper';
+import { FormControlLabel, FormControl, Checkbox, Button } from "@mui/material";
+import Link from "next/link";
+import React, {
+	useState,
+	useContext,
+	Dispatch,
+	SetStateAction,
+	useEffect,
+} from "react";
+import CheckboxElement from "../../../components/Checkbox/Checkbox";
+import Parent from "../../../components/parent/Parent";
+import Styles from "../../../styles/practice/Type.module.scss";
+import { StatesContext } from "../../_app";
+import { useRouter } from "next/router";
+import { vibrate } from "../../../utils/vibrate.helper";
 
 function CheckboxComp({
 	selected,
@@ -27,7 +33,7 @@ function CheckboxComp({
 					onClick={vibrate}
 					control={
 						<Checkbox
-							sx={{ '&.Mui-checked': { color: '#FF7D39' } }}
+							sx={{ "&.Mui-checked": { color: "#FF7D39" } }}
 							checked={opt === selected}
 							onChange={() => {
 								setSelected(opt);
@@ -43,16 +49,16 @@ function CheckboxComp({
 }
 
 function TypeOfPractice() {
-	const {states} = useContext(StatesContext);
-	const [selected, setSelected] = useState('kbm');
-	const [length, setLength] = useState('25');
+	const { states } = useContext(StatesContext);
+	const [selected, setSelected] = useState("kbm");
+	const [length, setLength] = useState("25");
 	const router = useRouter();
 
-	useEffect(()=>{
-		if(!states.username){
-			router.push('/');
+	useEffect(() => {
+		if (!states.username) {
+			router.push("/");
 		}
-	}, [])
+	}, []);
 
 	return (
 		<Parent>
@@ -64,8 +70,8 @@ function TypeOfPractice() {
 						<CheckboxComp
 							selected={selected}
 							setSelected={setSelected}
-							label={'Guess the Kanji by its meaning.'}
-							opt={'kbm'}
+							label={"Guess the Kanji by its meaning."}
+							opt={"kbm"}
 						/>
 					</div>
 				</div>
@@ -75,8 +81,8 @@ function TypeOfPractice() {
 						<CheckboxComp
 							selected={selected}
 							setSelected={setSelected}
-							label={'Guess the meaning of Kanji.'}
-							opt={'mok'}
+							label={"Guess the meaning of Kanji."}
+							opt={"mok"}
 						/>
 					</div>
 				</div>
@@ -87,26 +93,32 @@ function TypeOfPractice() {
 						<CheckboxComp
 							selected={length}
 							setSelected={setLength}
-							opt={'25'}
-							label={'25'}
+							opt={"25"}
+							label={"25"}
 						/>
 						<CheckboxComp
 							selected={length}
 							setSelected={setLength}
-							opt={'50'}
-							label={'50'}
+							opt={"50"}
+							label={"50"}
 						/>
 						<CheckboxComp
 							selected={length}
 							setSelected={setLength}
-							opt={'75'}
-							label={'75'}
+							opt={"75"}
+							label={"75"}
 						/>
 						<CheckboxComp
 							selected={length}
 							setSelected={setLength}
-							opt={'100'}
-							label={'100'}
+							opt={"100"}
+							label={"100"}
+						/>
+						<CheckboxComp
+							selected={length}
+							setSelected={setLength}
+							opt={"all"}
+							label={"All"}
 						/>
 					</div>
 				</div>
