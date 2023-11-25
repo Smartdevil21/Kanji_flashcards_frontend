@@ -303,7 +303,7 @@ const Home: NextPage = () => {
 												<MenuItem value={"Choose List"}>
 													<span>Choose List</span>
 												</MenuItem>
-												{states.lists.map(
+												{/* {states.lists.map(
 													(ele, index) => {
 														if (
 															!ele.listItems?.includes(
@@ -336,6 +336,62 @@ const Home: NextPage = () => {
 																</MenuItem>
 															);
 														}
+													}
+												)} */}
+												{states.lists.map(
+													(ele, index) => {
+														const ifWordExistsInList =
+															ele.listItems?.includes(
+																wordList[
+																	counter
+																		.pointer
+																]?.word
+															);
+														return (
+															<MenuItem
+																key={index}
+																sx={
+																	ifWordExistsInList
+																		? {
+																				backgroundColor:
+																					"rgba(255,0,0,0.2)",
+																				color: "red",
+																				opacity:
+																					"0.5",
+																				pointerEvents:
+																					"none",
+																				"&:hover":
+																					{
+																						backgroundColor:
+																							"rgba(255,0,0,0.2)",
+																						color: "red",
+																					},
+																		  }
+																		: {}
+																}
+																onClick={() => {
+																	if (
+																		!ifWordExistsInList
+																	) {
+																		addToList(
+																			{
+																				listName:
+																					ele.listName,
+																			}
+																		);
+																	}
+																}}
+																value={
+																	ele.listName
+																}
+															>
+																<span>
+																	{
+																		ele.listName
+																	}
+																</span>
+															</MenuItem>
+														);
 													}
 												)}
 											</Select>
