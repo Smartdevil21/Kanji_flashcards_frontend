@@ -15,6 +15,9 @@ import {
 	Stack,
 	CircularProgress,
 	Button,
+	InputLabel,
+	Select,
+	MenuItem,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
 import DangerousIcon from "@mui/icons-material/Dangerous";
@@ -25,6 +28,7 @@ import { getUserLists } from "../../../../typings/services/lists/getUserLists.se
 import { getKanjisByFilter } from "../../../../typings/services/kanjis/getKanjisByFilter.service";
 import { KanjiEntry } from "../../../../typings/interfaces/kanjis/kanjiList.interface";
 import { getEveryKanji } from "../../../../typings/services/kanjis/getEveryKanji.service";
+import { updateList } from "../../../../typings/services/lists/updateList.service";
 import { vibrate } from "../../../../utils/vibrate.helper";
 import { ListData } from "../../../../typings/interfaces/lists/getUserLists.interface";
 
@@ -139,7 +143,7 @@ function CreateOptions({
 
 function Game() {
 	const router = useRouter();
-	const { states } = useContext(StatesContext);
+	const { states, setStates } = useContext(StatesContext);
 	const { practiceOpt, lists } = states;
 	const [quesDetails, setQuesDetails] = useState<QuestionDetails>({
 		questionsKanjis: [],
@@ -170,6 +174,7 @@ function Game() {
 		answerArr: [],
 	});
 	const [loading, setLoading] = useState(true);
+	const [bookmarking, setBookmarking] = useState(false);
 	const [coveredQuestions, setCoveredQuestions] = useState<string[]>([]);
 	const [gameLength, setGameLength] = useState(0);
 	const [start, setStart] = useState(false);
@@ -179,6 +184,35 @@ function Game() {
 		wrong: 0,
 	});
 	const [allKanjis, setAllKanjis] = useState<KanjiEntry[]>([]);
+
+	async function addToList({
+		listName,
+	}: {
+		listName: string;
+	}): Promise<void> {
+		setBookmarking(true);
+		try {
+			const response = await updateList({
+				word: quesDetails.question.word,
+				action: "add",
+				uid: states.uid,
+				listName,
+			});
+			const activeList = states.lists.filter(
+				(ele) => ele.listName === listName
+			)[0];
+			activeList.listItems.push(quesDetails.question.word);
+			setStates((prev) => ({
+				...prev,
+				lists: prev.lists
+					.filter((ele) => ele.listName !== listName)
+					.concat([activeList]),
+			}));
+		} catch (error) {
+			console.log(error);
+		}
+		setBookmarking(false);
+	}
 
 	useEffect(() => {
 		if (router.query.l === "all") {
@@ -405,25 +439,159 @@ function Game() {
 						{counter.count}/{gameLength}
 					</p>
 				</div>
+
 				{!loading ? (
 					start ? (
-						<div className={Styles.question}>
-							<h1>
-								{router.query.m === "kbm"
-									? quesDetails.question?.word
-									: quesDetails.question.meaning}
-							</h1>
-							<div className={Styles.options}>
-								<CreateOptions
-									answer={quesDetails.answer}
-									changeQuestion={changeQuestion}
-									optArr={quesDetails.answerArr}
-									length={Number(gameLength)}
-									counter={counter}
-									setCounter={setCounter}
-								/>
+						<>
+							<Stack sx={{ mt: 2 }}>
+								{states.email_verified &&
+									states.userLoggedIn && (
+										<>
+											{bookmarking ? (
+												<CircularProgress
+													style={{
+														color: "var(--orange)",
+														marginRight: "20px",
+													}}
+												/>
+											) : (
+												<FormControl fullWidth>
+													<InputLabel id="demo-simple-select-label">
+														Add to
+													</InputLabel>
+													<Select
+														labelId="demo-simple-select-label"
+														id="demo-simple-select"
+														value={"Choose List"}
+														size={"small"}
+														label="Add to"
+														// onChange={handleChange}
+													>
+														<MenuItem
+															value={
+																"Choose List"
+															}
+														>
+															<span>
+																Choose List
+															</span>
+														</MenuItem>
+														{/* {states.lists.map(
+													(ele, index) => {
+														if (
+															!ele.listItems?.includes(
+																wordList[
+																	counter
+																		.pointer
+																]?.word
+															)
+														) {
+															return (
+																<MenuItem
+																	key={index}
+																	onClick={() => {
+																		addToList(
+																			{
+																				listName:
+																					ele.listName,
+																			}
+																		);
+																	}}
+																	value={
+																		ele.listName
+																	}
+																>
+																	<span>
+																		{
+																			ele.listName
+																		}
+																	</span>
+																</MenuItem>
+															);
+														}
+													}
+												)} */}
+														{states.lists.map(
+															(ele, index) => {
+																const ifWordExistsInList =
+																	ele.listItems?.includes(
+																		quesDetails
+																			.question
+																			.word
+																	);
+																return (
+																	<MenuItem
+																		key={
+																			index
+																		}
+																		sx={
+																			ifWordExistsInList
+																				? {
+																						backgroundColor:
+																							"rgba(255,0,0,0.2)",
+																						color: "red",
+																						opacity:
+																							"0.5",
+																						pointerEvents:
+																							"none",
+																						"&:hover":
+																							{
+																								backgroundColor:
+																									"rgba(255,0,0,0.2)",
+																								color: "red",
+																							},
+																				  }
+																				: {}
+																		}
+																		onClick={() => {
+																			if (
+																				!ifWordExistsInList
+																			) {
+																				addToList(
+																					{
+																						listName:
+																							ele.listName,
+																					}
+																				);
+																			}
+																		}}
+																		value={
+																			ele.listName
+																		}
+																	>
+																		<span>
+																			{
+																				ele.listName
+																			}
+																		</span>
+																	</MenuItem>
+																);
+															}
+														)}
+													</Select>
+												</FormControl>
+											)}
+										</>
+									)}
+							</Stack>
+							<div className={Styles.question}>
+								<h1>
+									{router.query.m === "kbm"
+										? quesDetails.question?.word
+										: quesDetails.question.meaning}
+								</h1>
+								<div className={Styles.options}>
+									<CreateOptions
+										answer={quesDetails.answer}
+										changeQuestion={changeQuestion}
+										optArr={quesDetails.answerArr}
+										length={Number(gameLength)}
+										counter={counter}
+										setCounter={setCounter}
+									/>
+								</div>
 							</div>
-						</div>
+						</>
 					) : (
 						<Button
 							onClick={() => {

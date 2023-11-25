@@ -64,7 +64,6 @@ const Home: NextPage = () => {
 					)[0].listItems,
 				});
 				setWordList(response1.data.data);
-				console.log(cardListName);
 			}
 			//Here to apply the /list/items request to get the kanjis of the list se;ected by the user.
 
