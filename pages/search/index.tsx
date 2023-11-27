@@ -1,4 +1,11 @@
-import React, { FormEvent, FormEventHandler, useState } from "react";
+import {
+	useState,
+	Dispatch,
+	SetStateAction,
+	useEffect,
+	useContext,
+	ChangeEvent,
+} from "react";
 import {
 	TextField,
 	Container,
@@ -7,23 +14,140 @@ import {
 	IconButton,
 	Typography,
 	CircularProgress,
+	FormControl,
+	InputLabel,
+	Select,
+	MenuItem,
 } from "@mui/material";
 import { KanjiEntry } from "../../typings/interfaces/kanjis/kanjiList.interface";
 import Parent from "../../components/parent/Parent";
 import { Icon } from "@iconify/react";
 import axios from "axios";
+import { StatesContext } from "../_app";
+import { updateList } from "../../typings/services/lists/updateList.service";
 
-function Item({ kanjiEntry }: { kanjiEntry?: KanjiEntry }) {
+function Item({ kanjiEntry }: { kanjiEntry: KanjiEntry }) {
+	const { states, setStates } = useContext(StatesContext);
+	const [bookmarking, setBookmarking] = useState(false);
+	const [wordList, setWordList] = useState<KanjiEntry[]>([]);
+	async function addToList({
+		listName,
+	}: {
+		listName: string;
+	}): Promise<void> {
+		setBookmarking(true);
+		try {
+			const response = await updateList({
+				word: kanjiEntry.word,
+				action: "add",
+				uid: states.uid,
+				listName,
+			});
+			const activeList = states.lists.filter(
+				(ele) => ele.listName === listName
+			)[0];
+			activeList.listItems.push(kanjiEntry.word);
+			setStates((prev) => ({
+				...prev,
+				lists: prev.lists
+					.filter((ele) => ele.listName !== listName)
+					.concat([activeList]),
+			}));
+		} catch (error) {
+			console.log(error);
+		}
+		setBookmarking(false);
+	}
 	return (
 		<Stack
 			direction={"column"}
 			gap={1}
 			sx={{ padding: 2, background: "#e5e5e5" }}
 		>
-			<span>
-				<Typography variant="h6">Word:</Typography>
-				<Typography>{kanjiEntry?.word}</Typography>
-			</span>
+			<Stack
+				direction={"row"}
+				justifyContent={"space-between"}
+				alignItems={"flex-start"}
+			>
+				<span>
+					<Typography variant="h6">Word:</Typography>
+					<Typography>{kanjiEntry?.word}</Typography>
+				</span>
+				<Box>
+					{states.email_verified && states.userLoggedIn && (
+						<>
+							{bookmarking ? (
+								<CircularProgress
+									style={{
+										color: "var(--orange)",
+										marginRight: "20px",
+									}}
+								/>
+							) : (
+								<FormControl fullWidth>
+									<InputLabel id="demo-simple-select-label">
+										Add to
+									</InputLabel>
+									<Select
+										labelId="demo-simple-select-label"
+										id="demo-simple-select"
+										value={"Choose List"}
+										size={"small"}
+										label="Add to"
+										// onChange={handleChange}
+									>
+										<MenuItem value={"Choose List"}>
+											<span>Choose List</span>
+										</MenuItem>
+										{states.lists.map((ele, index) => {
+											const ifWordExistsInList =
+												ele.listItems?.includes(
+													kanjiEntry?.word
+												);
+											return (
+												<MenuItem
+													key={index}
+													sx={
+														ifWordExistsInList
+															? {
+																	backgroundColor:
+																		"rgba(255,0,0,0.2)",
+																	color: "red",
+																	opacity:
+																		"0.5",
+																	pointerEvents:
+																		"none",
+																	"&:hover": {
+																		backgroundColor:
+																			"rgba(255,0,0,0.2)",
+																		color: "red",
+																	},
+															  }
+															: {}
+													}
+													onClick={() => {
+														if (
+															!ifWordExistsInList
+														) {
+															addToList({
+																listName:
+																	ele.listName,
+															});
+														}
+													}}
+													value={ele.listName}
+												>
+													<span>{ele.listName}</span>
+												</MenuItem>
+											);
+										})}
+									</Select>
+								</FormControl>
+							)}
+						</>
+					)}
+				</Box>
+			</Stack>
 			<span>
 				<Typography variant="h6">Meaning:</Typography> {""}{" "}
 				<Typography>{kanjiEntry?.meaning}</Typography>
@@ -87,6 +211,7 @@ function Item({ kanjiEntry }: { kanjiEntry?: KanjiEntry }) {
 function Search() {
 	const [search, setSearch] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [msg, setMsg] = useState("");
 	const [results, setResults] = useState<KanjiEntry[]>([]);
 
 	const handleSubmit = async () => {
@@ -97,11 +222,19 @@ function Search() {
 				{ search }
 			);
 			setResults(res.data.data);
+			if (!res.data.data.length) {
+				setMsg(`No results found for ${search}..`);
+			}
 		} catch (error: any) {
-			alert(
+			// alert(
+			// 	error.response.data.message ||
+			// 		error.message ||
+			// 		"Something went wrong. Please try again!"
+			// );
+			setMsg(
 				error.response.data.message ||
 					error.message ||
-					"Something went wrong. Please try again!"
+					`No results found for ${search}..`
 			);
 			console.log(error);
 		}
@@ -128,6 +261,7 @@ function Search() {
 					>
 						<TextField
 							size="small"
+							placeholder="What you want to search?"
 							value={search}
 							onChange={(e) => {
 								setSearch(e.target.value);
@@ -150,8 +284,9 @@ function Search() {
 						))
 					) : (
 						<Typography>
-							No entries found for your search &apos;{search}
-							&apos;
+							{/* No entries found for your search &apos;{search}
+							&apos; */}
+							{msg}
 						</Typography>
 					)}
 				</Stack>
