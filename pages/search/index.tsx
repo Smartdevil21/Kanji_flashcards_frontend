@@ -272,13 +272,19 @@ function Search() {
 							{!loading ? (
 								<Icon icon="material-symbols:search" />
 							) : (
-								<CircularProgress size={"small"} />
+								<CircularProgress
+									style={{
+										color: "var(--orange)",
+										width: 26,
+										height: 26,
+									}}
+								/>
 							)}
 						</IconButton>
 					</form>
 				</Stack>
 				<Stack direction={"column"} gap={4}>
-					{!loading && results?.length ? (
+					{!loading && results?.length > 0 ? (
 						results?.map((result, index) => (
 							<Item key={result._id} kanjiEntry={result} />
 						))

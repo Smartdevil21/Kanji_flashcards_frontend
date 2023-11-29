@@ -302,41 +302,6 @@ const Home: NextPage = () => {
 												<MenuItem value={"Choose List"}>
 													<span>Choose List</span>
 												</MenuItem>
-												{/* {states.lists.map(
-													(ele, index) => {
-														if (
-															!ele.listItems?.includes(
-																wordList[
-																	counter
-																		.pointer
-																]?.word
-															)
-														) {
-															return (
-																<MenuItem
-																	key={index}
-																	onClick={() => {
-																		addToList(
-																			{
-																				listName:
-																					ele.listName,
-																			}
-																		);
-																	}}
-																	value={
-																		ele.listName
-																	}
-																>
-																	<span>
-																		{
-																			ele.listName
-																		}
-																	</span>
-																</MenuItem>
-															);
-														}
-													}
-												)} */}
 												{states.lists.map(
 													(ele, index) => {
 														const ifWordExistsInList =
