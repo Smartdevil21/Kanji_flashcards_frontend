@@ -19,5 +19,5 @@ export const defaultKanji = {
 			pronounciation: "",
 		},
 	},
-	level: "3",
+	level: "2",
 };
